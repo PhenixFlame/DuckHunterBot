@@ -1,6 +1,7 @@
+import discord
 from config import settings
 
-import discord
+token = settings['token']['bot']
 
 
 class MyClient(discord.Client):
@@ -15,4 +16,4 @@ class MyClient(discord.Client):
 
 
 client = MyClient()
-client.run(settings['token'])
+client.run(token)
