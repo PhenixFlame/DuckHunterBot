@@ -65,6 +65,7 @@ client.run('my token goes here')
     - content
     - channel - обьект канала
     - guild - обьект гильдии
+    - created_at - время создания [_datetime.datetime_]
     - mentions - List[abc.User]  
     Упоминание пользователей в сообщении,
      список не упорядоченный в порядке упоминания
