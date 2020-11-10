@@ -41,10 +41,9 @@ class Post:
         self.channel = channel
         self.nextTimeSend = now()
 
-    async def send(self, channel: discord.TextChannel, text):
+    async def send(self, text):
         """
         Send text to channel, controlling time interval between messages
-        :param channel:
         :param text:
         :return:
         """
@@ -54,6 +53,6 @@ class Post:
         if wait_time > 0:
             await asyncio.sleep(wait_time)
 
-        message = await channel.send(text)
+        message = await self.channel.send(text)
         self.nextTimeSend = message.created_at + self.messageInterval
 
