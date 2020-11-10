@@ -1,6 +1,6 @@
 import discord
 from abc_ import Publisher
-from logger import getLogger
+from logger import AsyncLogger
 from datetime import datetime, timedelta
 import asyncio
 
@@ -13,10 +13,10 @@ now = datetime.now
 
 
 class DiscordClient(discord.Client, Publisher):
-    logger = getLogger('DiscordClient')
+    logger = AsyncLogger('DiscordClient')
 
     async def on_ready(self):
-        self.logger.debug('Logged on as {0}!'.format(self.user))
+        await self.logger.debug('Logged on as {0}!'.format(self.user))
 
     async def on_message_edit(self, before, after):
         await self.publish(after)

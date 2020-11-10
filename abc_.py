@@ -1,5 +1,5 @@
 import abc
-from logger import getLogger
+from logger import AsyncLogger
 
 
 class NoActionError(Exception):
@@ -44,7 +44,7 @@ class Visitor(abc.ABC):
 
     def __init__(self):
         self.name = type(self).__name__
-        self.logger = getLogger(self.name)
+        self.logger = AsyncLogger(self.name)
 
     async def action(self, obj):
         method = 'on_' + self.name
