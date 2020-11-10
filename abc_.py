@@ -49,6 +49,6 @@ class Visitor(abc.ABC):
     async def action(self, obj):
         method = 'on_' + self.name
         try:
-            getattr(obj, method)()
+            await getattr(obj, method)()
         except AttributeError as e:
             await self.logger.debug(f'{type(obj)} doesn`t have action on {self.name}')
