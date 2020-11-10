@@ -2,6 +2,12 @@ import abc
 from logger import getLogger
 
 
+class NoActionError(Exception):
+    def __init__(self, message, e):
+        self.message = message
+        self.error = e
+
+
 class Subscriber(abc.ABC):
     @abc.abstractmethod
     async def receive(self, message):
@@ -32,6 +38,9 @@ class Publisher:
 
 
 class Visitor(abc.ABC):
+    """
+    raise NoActionError if there doesn't exist action for Visitor
+    """
 
     def __init__(self):
         self.name = type(self).__name__
@@ -42,5 +51,5 @@ class Visitor(abc.ABC):
         method = 'on_' + self.name
         try:
             getattr(obj, method)()
-        except AttributeError:
-            self.logger.info(f'{type(obj)} doesn`t have action on {self.name}')
+        except AttributeError as e:
+            raise NoActionError(f'{type(obj)} doesn`t have action on {self.name}', e)
