@@ -51,4 +51,4 @@ class Visitor(abc.ABC):
         try:
             getattr(obj, method)()
         except AttributeError as e:
-            raise NoActionError(f'{type(obj)} doesn`t have action on {self.name}', e)
+            await self.logger.debug(f'{type(obj)} doesn`t have action on {self.name}')
