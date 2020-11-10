@@ -26,7 +26,7 @@ class Publisher:
             self._subscribers = set()
         return self._subscribers
 
-    async def _publish(self, message):
+    async def publish(self, message):
         for s in self.subscribers:
             await s.receive(message)
 

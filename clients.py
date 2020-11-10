@@ -19,10 +19,10 @@ class DiscordClient(discord.Client, Publisher):
         self.logger.debug('Logged on as {0}!'.format(self.user))
 
     async def on_message_edit(self, before, after):
-        await self._publish(after)
+        await self.publish(after)
 
     async def on_message(self, message):
-        await self._publish(message)
+        await self.publish(message)
 
 
 class Post:
