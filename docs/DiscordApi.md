@@ -56,6 +56,10 @@ client.run('my token goes here')
 # События
   * `on_typing(channel, user, when)`
   * `on_message(message)`
+  * `on_message_edit(before, after)`
+  before, after - старая и текущая версии сообщения.
+  Это событие может быть не вызвано, если соответсвующего
+  сообщения не нашлось в кэше клиента 
 
 # Сообщения
 Свойства у сообщений, предаваемых on_message

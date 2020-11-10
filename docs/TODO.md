@@ -9,23 +9,35 @@
         - обновлять на основе ответа от бота
     + Учитывать дебаффы
         - конфискацию оружия
-        
+    
 2. Опционально
     + Учитывать баффы на оружии
     + Качаться с помощью dhbuy 20 - и развлекать пассажиров))
     
-```plantuml    
-start
-:Вывалить мысли
-в текст;
-if (Бред?) then (Возможно)
-    :Дать посмотреть коллеге;
-    if (Сойдет?) then (Да)
-    else (Нет)
-        :Помедитировать над текстом;
-    endif
-    :Разместить на //Хабре//;
-else (Точно)
-    stop
-endif
-stop
+```mermaid
+classDiagram
+      Subcscriber <|-- EventManager
+      EventManager  <|-- Events
+      Piblisher <|-- EventManager
+      Piblisher <|-- MyClient
+      DiscordClient <|-- MyClient
+      Animal <|-- Fish
+      Animal <|-- Zebra
+      Animal : +int age
+      Animal : +String gender
+      Animal: +isMammal()
+      Animal: +mate()
+      class Duck{
+          +String beakColor
+          +swim()
+          +quack()
+      }
+      class Fish{
+          -int sizeInFeet
+          -canEat()
+      }
+      class Zebra{
+          +bool is_wild
+          +run()
+      }
+```
