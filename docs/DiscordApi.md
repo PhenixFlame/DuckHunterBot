@@ -66,7 +66,7 @@ client.run('my token goes here')
 * properties
     - id
     - author
-    - content
+    - content - текст сообщения
     - channel - обьект канала
     - guild - обьект гильдии
     - created_at - время создания [_datetime.datetime_]
