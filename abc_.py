@@ -46,7 +46,6 @@ class Visitor(abc.ABC):
         self.name = type(self).__name__
         self.logger = getLogger(self.name)
 
-    @abc.abstractmethod
     async def action(self, obj):
         method = 'on_' + self.name
         try:
