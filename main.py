@@ -1,19 +1,24 @@
-import discord
 from config import settings
+from events import EventManager, DecisionTree
+from hunter import DuckHunter
+from clients import DiscordClient, Post
+from decisionTree import DECISION_TREE_DICT
 
-token = settings['token']['bot']
+# ____________CONSTANTS________________
+TOKEN = settings['token']['bot']
+ID_HUNT_CHANNEL = False
+# ____________END_CONSTANTS____________
 
+client = DiscordClient()
+HuntChannel = client.get_channel(ID_HUNT_CHANNEL)
 
-class MyClient(discord.Client):
-    async def on_ready(self):
-        print('Logged on as {0}!'.format(self.user))
+post = Post(HuntChannel)
 
-    async def on_message(self, message):
-        print(message)
-        print('Channel:{0.channel}\n'
-              '\tMessage from {0.author}:\n'
-              '\t\t{0.content}'.format(message))
+decision_tree = DecisionTree(DECISION_TREE_DICT)
+eventmanager = EventManager(HuntChannel, decision_tree)
+duck_hunter = DuckHunter(post)
 
+eventmanager.subscrive(duck_hunter)
+client.subscrive(eventmanager)
 
-client = MyClient()
-client.run(token)
+client.run(TOKEN)
