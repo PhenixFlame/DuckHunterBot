@@ -3,10 +3,19 @@ from logger import AsyncLogger
 import discord
 
 
+def build_event_tree(tree):
+    if isinstance(tree, str):
+        return Event(tree)
+    return {
+        i: build_event_tree(tree_)
+        for i, tree_ in tree.items()
+    }
+
+
 class DecisionTree:
     def __init__(self, tree_dict):
         self.logger = AsyncLogger(type(self).__name__)
-        self.tree_dict = tree_dict
+        self.tree_dict = build_event_tree(tree_dict)
 
     async def decision(self, message):
         return await self._decision(message, self.tree_dict)
