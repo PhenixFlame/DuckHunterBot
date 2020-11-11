@@ -30,11 +30,11 @@ class Publisher:
         for s in self.subscribers:
             await s.receive(message)
 
-    def subscrive(self, s):
-        self.subscribers.add(s)
+    def subscrive(self, *s):
+        self.subscribers.update(s)
 
-    def unsubscrive(self, s):
-        self.subscribers.discard(s)
+    def unsubscrive(self, *s):
+        self.subscribers.difference_update(s)
 
 
 class Visitor(abc.ABC):
