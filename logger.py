@@ -1,30 +1,11 @@
 import logging
 import asyncio
 from logging.config import dictConfig
+import funcsource as fs
+import os
 
-loggerDictConfig = {
-  "formatters": {
-    "detailed": {
-      "class": "logging.Formatter",
-      "datefmt": "%m/%d/%Y %I:%M:%S",
-      "format": "[%(asctime)s] %(relativeCreated)dms : %(name)s : %(levelname)s : %(message)s"
-    }
-  },
-  "handlers": {
-    "console": {
-      "class": "logging.StreamHandler",
-      "formatter": "detailed",
-      "level": "DEBUG"
-    }
-  },
-  "root": {
-    "handlers": [
-      "console"
-    ],
-    "level": "DEBUG"
-  },
-  "version": 1
-}
+DIR = os.path.dirname(os.path.abspath(__file__)) + '/'
+loggerDictConfig = fs.read_file(DIR + 'logger_config.yaml')
 
 dictConfig(loggerDictConfig)
 

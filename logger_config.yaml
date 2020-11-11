@@ -1,0 +1,38 @@
+formatters:
+  detailed:
+    class: logging.Formatter
+    format: '[%(asctime)s] %(relativeCreated)dms : %(name)s : %(levelname)s : %(message)s'
+#    format: '{asctime}:\n {relativeCreated:6d} {name}:{levelname} : {message}'
+    datefmt: '%m/%d/%Y %I:%M:%S'
+handlers:
+  console:
+    level: DEBUG
+    formatter: detailed
+    class: logging.StreamHandler
+#  errors:
+#    class: logging.FileHandler
+#    filename: mplog-errors.log
+#    formatter: detailed
+#    level: ERROR
+#    mode: w
+#  file:
+#    class: logging.FileHandler
+#    filename: mplog.log
+#    formatter: detailed
+#    mode: w
+#  foofile:
+#    class: logging.FileHandler
+#    filename: mplog-foo.log
+#    formatter: detailed
+#    mode: w
+#loggers:
+#  foo:
+#    handlers:
+#    - foofile
+root:
+  level: DEBUG
+  handlers:
+    - console
+#    - file
+#    - errors
+version: 1
