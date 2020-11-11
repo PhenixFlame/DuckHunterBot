@@ -25,10 +25,10 @@ handlers:
 #    filename: mplog-foo.log
 #    formatter: detailed
 #    mode: w
-#loggers:
-#  foo:
-#    handlers:
-#    - foofile
+loggers:
+  discord:
+    level: ERROR
+
 root:
   level: DEBUG
   handlers:
