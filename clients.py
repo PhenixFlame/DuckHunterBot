@@ -14,8 +14,15 @@ now = datetime.now
 
 class DiscordClient(discord.Client, Publisher):
     logger = AsyncLogger('DiscordClient')
+    ready = asyncio.Event()
+    channels = {}
 
     async def on_ready(self):
+        for c in self.get_all_channels():
+            guild = c.guild.name
+            self.channels.setdefault(guild, {}).setdefault(c.name, c)
+
+        self.ready.set()
         await self.logger.debug('Logged on as {0}!'.format(self.user))
 
     async def on_message_edit(self, before, after):
