@@ -31,6 +31,14 @@ class DiscordClient(discord.Client, Publisher):
     async def on_message(self, message):
         await self.publish(message)
 
+    async def get_raw_messages(self, channel, limit=100, before_id=None):
+        """
+        get raw_messages_data from discord api
+        similary iterators.HistoryIterator._retrieve_messages_before_strategy
+        """
+        data = await self.http.logs_from(channel.id, 100, before=before_id)
+        return data
+
 
 class Post:
     """
