@@ -1,4 +1,4 @@
-from config import TOKEN, GUILD_HUNT, CHANNEL_HUNT
+from config import TOKEN, BOTFLAG, GUILD_HUNT, CHANNEL_HUNT
 from events import EventManager, DecisionTree
 from hunter import DuckHunter
 from clients import DiscordClient, Post
@@ -22,4 +22,4 @@ async def initialization():
     client.subscrive(eventmanager)
 
 client.loop.create_task(initialization())
-client.run(TOKEN)
+client.run(TOKEN, bot=BOTFLAG)
