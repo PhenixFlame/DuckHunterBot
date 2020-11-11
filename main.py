@@ -6,19 +6,26 @@ from decisionTree import DECISION_TREE_DICT
 
 # ____________CONSTANTS________________
 TOKEN = settings['token']['bot']
+GUILD_HUNT = 'Сервер an_fenix'
+CHANNEL_HUNT = 'test'
 ID_HUNT_CHANNEL = False
 # ____________END_CONSTANTS____________
 
 client = DiscordClient()
-HuntChannel = client.get_channel(ID_HUNT_CHANNEL)
 
-post = Post(HuntChannel)
 
-decision_tree = DecisionTree(DECISION_TREE_DICT)
-eventmanager = EventManager(HuntChannel, decision_tree)
-duck_hunter = DuckHunter(post)
+async def initialization():
+    await client.ready.wait()
 
-eventmanager.subscrive(duck_hunter)
-client.subscrive(eventmanager)
+    HuntChannel = client.channels[GUILD_HUNT][CHANNEL_HUNT]
+
+    post = Post(HuntChannel)
+
+    decision_tree = DecisionTree(DECISION_TREE_DICT)
+    eventmanager = EventManager(HuntChannel, decision_tree)
+    duck_hunter = DuckHunter(post)
+
+    eventmanager.subscrive(duck_hunter)
+    client.subscrive(eventmanager)
 
 client.run(TOKEN)
