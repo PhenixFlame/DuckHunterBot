@@ -1,15 +1,8 @@
-from config import settings
+from config import TOKEN, GUILD_HUNT, CHANNEL_HUNT
 from events import EventManager, DecisionTree
 from hunter import DuckHunter
 from clients import DiscordClient, Post
 from decisionTree import DECISION_TREE_DICT
-
-# ____________CONSTANTS________________
-TOKEN = settings['token']['bot']
-GUILD_HUNT = 'Сервер an_fenix'
-CHANNEL_HUNT = 'test'
-ID_HUNT_CHANNEL = False
-# ____________END_CONSTANTS____________
 
 client = DiscordClient()
 
@@ -28,4 +21,5 @@ async def initialization():
     eventmanager.subscrive(duck_hunter)
     client.subscrive(eventmanager)
 
+client.loop.create_task(initialization())
 client.run(TOKEN)

@@ -1,16 +1,8 @@
-from config import settings
 from logger import AsyncLogger
-from hunter import DuckHunter
 from clients import DiscordClient, Post
-from decisionTree import DECISION_TREE_DICT
 from abc_ import Subscriber
-
-# ____________CONSTANTS________________
-TOKEN = settings['token']['bot']
-GUILD_HUNT = 'Сервер an_fenix'
-CHANNEL_HUNT = 'test'
-ID_HUNT_CHANNEL = False
-# ____________END_CONSTANTS____________
+import discord
+from config import TOKEN, GUILD_HUNT, CHANNEL_HUNT
 
 client = DiscordClient()
 
@@ -22,11 +14,12 @@ class Listener(Subscriber):
         self.channel = channel
         self.messages = list()
 
-    async def receive(self, message):
+    async def receive(self, message: discord.Message):
         # if message.channel.name == self.channel.name:
         if message.channel == self.channel:
             self.messages.append(message)
-            await self.logger.info(message.content)
+            text = f'{message.author} : {message.content}'
+            await self.logger.info(text)
 
 
 async def initialization():

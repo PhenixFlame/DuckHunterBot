@@ -1,11 +1,7 @@
 from clients import DiscordClient
-import discord
-import funcsource as fs
-from config import settings
-import asyncio
+from config import TOKEN, GUILD_HUNT, CHANNEL_HUNT
 
-
-TOKEN = settings['token']['bot']
+# TOKEN = settings['token']['bot']
 
 client = DiscordClient()
 loop = client.loop
