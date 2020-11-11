@@ -25,11 +25,19 @@ class DecisionTree:
             for check, next_tree in tree.items():
                 if await check(message):
                     return await self._decision(message, next_tree)
-        except Exception as e:
-            if tree is None:
-                await self.logger.info(f'{e} for message: \n\t{message.content}')
+        except AttributeError as e:
 
+            if tree is None:
+                await self.logger.info(f'No Event for message: \n\t{message.content}')
+
+            if not isinstance(tree, Event):
+                await self.logger.critical(f'tree is not Event! message: \n\t{message.content}')
+
+            await self.logger.debug(f'{repr(tree)} for "{message.content}"')
             return tree
+        except Exception as e:
+            await self.logger.error(f'ERROR {e} for message: \n\t{message.content}')
+            raise e
 
 
 class EventManager(Publisher, Subscriber):
