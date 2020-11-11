@@ -1,7 +1,7 @@
 # Предисловие
 Данная статья - краткое описание работы с dicord python library на русском языке,
  являющаяся вольным переводом официальной [документации](https://discordpy.readthedocs.io/en/latest/intro.html#basic-concepts)
- 
+ Настройка бота осуществляется по ссылке: https://discord.com/developers/applications/
  
 # Basic Concepts
 Библиотека является оберткой вокруг событий,
@@ -52,6 +52,14 @@ client.run('my token goes here')
 [забанен](https://support.discord.com/hc/en-us/articles/115002192352)
 
 * `get_channel(id)`, `get_guild(id)`
+
+Вообще говоря, существует метод history у канала для получения сообщений. Однако они представлены ввиде класса Message.
+Чтобы получить сырой json из апи, можно воспользоваться методом:
+`await client.http.logs_from(self.channel.id, limit, before=before)`
+`before : int = None or int(message['id'])`
+который возвращает список словарей. Используется пагинация по 100 штук. Для получения большего количества
+необходимо итерироваться с использованием `before = int(data[-1]['id'])`
+Придется порыться в исходном коде методов iterators.HistoryIterator._retrieve_messages_before_strategy, http.HTTPClient.logs_from 
 
 # События
   * `on_typing(channel, user, when)`
