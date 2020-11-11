@@ -52,3 +52,6 @@ class Visitor(abc.ABC):
             await getattr(obj, method)()
         except AttributeError as e:
             await self.logger.debug(f'{type(obj)} doesn`t have action on {self.name}')
+
+    def __repr__(self):
+        return f"{type(self).__name__}({self.name})"
