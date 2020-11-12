@@ -36,8 +36,15 @@ class DiscordClient(discord.Client, Publisher):
         get raw_messages_data from discord api
         similary iterators.HistoryIterator._retrieve_messages_before_strategy
         """
-        data = await self.http.logs_from(channel.id, 100, before=before_id)
-        return data
+        data = []
+        while True:
+            data_ = await self.http.logs_from(channel.id, 100, before=before_id)
+            data.extend(data_)
+            limit -= 100
+            before_id = int(data_[-1]['id'])
+
+            if len(data_) < 100 or limit <= 0:
+                return data
 
 
 class Post:
