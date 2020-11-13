@@ -3,6 +3,7 @@ from abc_ import Publisher
 from logger import AsyncLogger
 from datetime import datetime, timedelta
 import asyncio
+import funcsource as fs
 
 # ____________CONSTANTS________________
 
@@ -36,15 +37,18 @@ class DiscordClient(discord.Client, Publisher):
         get raw_messages_data from discord api
         similary iterators.HistoryIterator._retrieve_messages_before_strategy
         """
-        data = []
-        while True:
-            data_ = await self.http.logs_from(channel.id, 100, before=before_id)
-            data.extend(data_)
-            limit -= 100
-            before_id = int(data_[-1]['id'])
-
-            if len(data_) < 100 or limit <= 0:
-                return data
+        with fs.log_errors():
+            data = []
+            timer = fs.Timer('get_raw_messages', self.logger, alert_period=5)
+            timer.start(limit)
+            while True:
+                data_ = await self.http.logs_from(channel.id, 100, before=before_id)
+                data.extend(data_)
+                limit -= 100
+                before_id = int(data_[-1]['id'])
+                if len(data_) < 100 or limit <= 0:
+                    return data
+                timer.checktime(len(data))
 
 
 class Post:
