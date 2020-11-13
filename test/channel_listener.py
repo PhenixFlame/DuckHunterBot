@@ -19,7 +19,7 @@ class Listener(Subscriber):
         if message.channel == self.channel:
             self.messages.append(message)
             text = f'{message.author} : {message.content}'
-            await self.logger.info(text)
+            self.logger.info(text)
 
 
 async def initialization():

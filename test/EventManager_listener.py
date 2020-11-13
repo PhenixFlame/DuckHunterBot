@@ -17,7 +17,7 @@ class EventListener(Subscriber):
         self.messages = list()
 
     async def receive(self, event):
-        await self.logger.info(repr(event))
+        self.logger.info(repr(event))
 
 
 class ChannelListener(Subscriber):
@@ -32,7 +32,7 @@ class ChannelListener(Subscriber):
         if message.channel == self.channel:
             self.messages.append(message)
             text = f'{message.author}:{message.content}'
-            await self.logger.info(text)
+            self.logger.info(text)
 
 
 async def initialization():

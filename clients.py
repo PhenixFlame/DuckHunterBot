@@ -23,7 +23,7 @@ class DiscordClient(discord.Client, Publisher):
             self.channels.setdefault(guild, {}).setdefault(c.name, c)
 
         self.ready.set()
-        await self.logger.debug('Logged on as {0}!'.format(self.user))
+        self.logger.debug('Logged on as {0}!'.format(self.user))
 
     async def on_message_edit(self, before, after):
         await self.publish(after)

@@ -15,22 +15,40 @@ class AsyncLogger:
     because default logger is blocked I/O
     """
     Executor = None
+    _loop = None
 
     def __init__(self, name):
-        self.logger = logging.getLogger(name)
+        if isinstance(name, str):
+            self.logger = logging.getLogger(name)
+        elif isinstance(name, logging.Logger):
+            self.logger = name
+        else:
+            raise TypeError('name must be Logger or str')
 
-    async def run(self, msg, type_):
-        loop = asyncio.get_running_loop()
-        loop.run_in_executor(self.Executor, getattr(self.logger, type_), msg)
+    @property
+    def loop(self):
+        if self._loop is None:
+            self._loop = asyncio.get_running_loop()
+        return self._loop
 
-    async def debug(self, msg):
-        await self.run(msg, 'debug')
+    def threadrun(self, msg, type_):
+        self.loop.run_in_executor(self.Executor, getattr(self.logger, type_), msg)
 
-    async def info(self, msg):
-        await self.run(msg, 'info')
+    def debug(self, msg):
+        self.threadrun(msg, 'debug')
 
-    async def error(self, msg):
-        await self.run(msg, 'error')
+    def info(self, msg):
+        self.threadrun(msg, 'info')
 
-    async def critical(self, msg):
-        await self.run(msg, 'critical')
+    def error(self, msg):
+        self.threadrun(msg, 'error')
+
+    def critical(self, msg):
+        self.threadrun(msg, 'critical')
+
+    def getChild(self, name):
+        return AsyncLogger(self.logger.getChild(name))
+
+
+
+
