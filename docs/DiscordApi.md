@@ -61,6 +61,12 @@ client.run('my token goes here')
 необходимо итерироваться с использованием `before = int(data[-1]['id'])`
 Придется порыться в исходном коде методов iterators.HistoryIterator._retrieve_messages_before_strategy, http.HTTPClient.logs_from 
 
+Для создания сообщений используется следующий интерфейс:
+Message(state=self, channel=channel, data=data)
+self - сам клиент
+channel - канал, с которого парсились сообщения
+data - raw data from json
+
 # События
   * `on_typing(channel, user, when)`
   * `on_message(message)`
