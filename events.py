@@ -1,6 +1,7 @@
 from abc_ import Publisher, Subscriber, Visitor
 from logger import AsyncLogger
 import discord
+from decisionTree import Event
 
 
 def build_event_tree(tree):
@@ -52,12 +53,6 @@ class EventManager(Publisher, Subscriber):
             event = await self.decisionTree.decision(message)
             if event:
                 await self.publish(event)
-
-
-class Event(Visitor):
-    def __init__(self, name):
-        self.name = name
-        self.logger = AsyncLogger(type(self).__name__)
 
 
 class NoDecisionError(Exception):
