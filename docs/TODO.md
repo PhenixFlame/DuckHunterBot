@@ -1,18 +1,22 @@
 TODO:
     DECISION_TREE_DICT and event_checkers
     TESTS for classes/event_checkers
-
-    Logger: formatter for pandas dataframe
+    + Сделать обычной обертку логгера, а не асинхронной
     
     Проблема с перезарядкой:
         1) бот не обрабатывает события в перерыве между отправкой сообщений
         2) бот не может отменить сообщение о выстреле в очереди сообщений
     
-    Сделать обычной обертку логгера, а не асинхронной
-     
-Ideas:
+        
+    Нужно стрелять сразу после получения информации о выстреле, а не чз 5 секунд
+    
+    Logger: formatter for pandas dataframe
 
 Тесты:
+    Тестирование регексов каждого события:
+        По отдельности регекс каждого события
+        Чз message обьекты для DecisionTree/EventManager
+        
     Нужен датасет с размеченными сообщениями для тестирования
         Выгрузить историю сообщений, разметить и сразу собрать дерево решений
 
@@ -91,4 +95,15 @@ traceback.extract_stack(f=None, limit=None)
             2) обертка для логгера, чтобы запускать его в стороннем потоке
     Нужны сообщения в сыром виде для тестов:
         3) используются внутренний апи библиотеки (get_raw_messages)
-    4) 
+    
+    Специальная структура событий:
+        словарь с регексами и тут же лежат тесты для регексов
+        происходит тестирование во время импорта модуля
+    
+class WrapperClient:
+    @staticmethod
+    def store_user(data):
+        return discord.User(state=WrapperClient, data=data)
+
+
+discord.Message(state=WrapperClient, channel='WrapperChannel', data=d[0])         
