@@ -42,8 +42,8 @@ class Visitor(abc.ABC):
     raise NoActionError if there doesn't exist action for Visitor
     """
 
-    def __init__(self):
-        self.name = type(self).__name__
+    def __init__(self, name=None):
+        self.name = name or type(self).__name__
         self.logger = AsyncLogger(self.name)
 
     async def action(self, obj):
