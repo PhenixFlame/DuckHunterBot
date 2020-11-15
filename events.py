@@ -3,13 +3,12 @@ import checkers
 from logger import AsyncLogger
 import discord
 from typing import AnyStr, Dict, List
-import yaml
-
-EVENTS = yaml.safe_load(open('resources/EVENTS.yaml', 'r'))
+from funcsource import log_errors
 
 LEVELS = {
     'INFO': 20,
     # 'DEBUG': 10,
+    'SILENCE': None,
     'NONE': None,
     'None': None,
     'null': None,
@@ -38,10 +37,11 @@ class Event(Visitor):
         self.config()
 
     async def checker(self, message):
-        return self._checker(message)
+        with log_errors(self.logger):
+            return self._checker(message)
 
     def config(self):
-        config = EVENTS.get(self.name, {})
+        config = EVENTS.get(self.name)
         if config:
             if 'checker' in config:
                 checker, pattern = config['checker']
