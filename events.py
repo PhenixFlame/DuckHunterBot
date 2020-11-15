@@ -1,5 +1,6 @@
 from abc_ import Publisher, Subscriber, Visitor
 import checkers
+from config import EVENTS
 from logger import AsyncLogger
 import discord
 from typing import AnyStr, Dict, List
