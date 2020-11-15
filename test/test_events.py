@@ -1,4 +1,5 @@
-from events import Event, EVENTS
+from events import Event, DecisionTree
+from config import EVENTS, DECISION_TREE
 import pytest
 
 
@@ -9,6 +10,26 @@ class TestMessage:
 
 async def Event_on_empty(event: Event):
     return await event.events(TestMessage(''))
+
+
+def test_creation_DecisionTree():
+
+    # catch for DecisionTree class
+    with pytest.raises(TypeError) as excinfo:
+        tree = DecisionTree(DECISION_TREE, 'FAILED_DECISION_TREE')
+
+    exception_msg = excinfo.value.args[0]
+    assert exception_msg == "Event FAILED_DECISION_TREE not found in EVENTS"
+
+    # catch for Event class
+    with pytest.raises(TypeError) as excinfo:
+        tree = DecisionTree(['ThisEventNotExist'], 'TEST_DECISION_TREE')
+
+    exception_msg = excinfo.value.args[0]
+    assert exception_msg == "Event ThisEventNotExist not found in EVENTS"
+
+    tree = DecisionTree(DECISION_TREE)
+    # print(tree)
 
 
 @pytest.mark.asyncio
