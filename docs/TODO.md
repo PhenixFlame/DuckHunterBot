@@ -19,7 +19,10 @@ TODO:
         
     Нужен датасет с размеченными сообщениями для тестирования
         Выгрузить историю сообщений, разметить и сразу собрать дерево решений
-
+    
+    # TODO test regex compile - verbose error compile exception : "re.error: nothing to repeat at position 110"
+    # example: s =  r"|**FLAPP**)"
+    
 диаграмма тестирования
 
 1. Убивать утку чз 500 секунд

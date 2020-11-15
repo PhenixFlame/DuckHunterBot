@@ -1,10 +1,16 @@
-from config import TOKEN, BOTFLAG, GUILD_HUNT, CHANNEL_HUNT
+from config import TOKEN, BOTFLAG, GUILD_HUNT, CHANNEL_HUNT, SELF_NAME, DUCK_HUNT_BOT_NAME
 from events import EventManager, DecisionTree
 from clients import DiscordClient
-from decisionTree import TEST_AUTHOR_DECISION_TREE_DICT
+from checkers import author_checker
 from abc_ import Subscriber
 from logger import AsyncLogger
 import discord
+
+TEST_AUTHOR_DECISION_TREE_DICT = {
+    author_checker(SELF_NAME): "MyMessageEvent",
+    author_checker(DUCK_HUNT_BOT_NAME): "DuckHuntEvent"
+}
+
 
 client = DiscordClient()
 
