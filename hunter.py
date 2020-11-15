@@ -1,11 +1,11 @@
 from abc_ import Subscriber, Visitor
 from datetime import datetime, timedelta
+from clients import now
 
 # ____________CONSTANTS________________
 
 HUNTSTARTDELAY = 500  # seconds
 SHOOTWAITTIME = 5  # seconds
-now = datetime.now
 
 # ____________END_CONSTANTS____________
 

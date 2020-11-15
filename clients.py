@@ -8,7 +8,7 @@ import funcsource as fs
 # ____________CONSTANTS________________
 
 POST_MESSAGE_PERIOD = 0.5  # seconds
-now = datetime.now
+now = fs.now
 
 # ____________END_CONSTANTS____________
 
@@ -73,7 +73,6 @@ class Post:
         :param text:
         :return:
         """
-
         # check message last time
         wait_time = (self.nextTimeSend - now()).total_seconds()
         if wait_time > 0:
