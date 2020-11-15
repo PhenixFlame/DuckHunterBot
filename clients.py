@@ -65,8 +65,9 @@ class Post:
         """
         self.messageInterval = timedelta(seconds=delay)
         self.channel = channel
+        self.name = channel.name
         self.nextTimeSend = now()
-        self.logger = AsyncLogger('Post').getChild(channel.name)
+        self.logger = AsyncLogger('Post').getChild(self.name)
 
     async def send(self, text):
         """
