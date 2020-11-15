@@ -1,3 +1,15 @@
+DecisionTree:
+  level: SILENCE
+TEST_DECISION_TREE:
+  level: SILENCE
+DuckHuntBotAuthor:
+  level: INFO
+  checker: [ author_checker,  DUCK_HUNT_BOT_NAME ]
+  tests: {}
+IAmMentioned:
+  level: INFO
+  checker: [ mention_checker,  SELF_NAME ]
+  tests: {}
 AmmoEvent:
   checker: [ regex, Ammo in weapon|MAGAZINE EMPTY ]
   tests:

@@ -1,0 +1,13 @@
+DuckHuntBotAuthor:
+  - NoDuckEvent
+  - DuckDeathEvent
+  - DuckAppearEvent
+#  - DuckBabyEvents
+  - IAmMentioned:
+      - AmmoEvent
+      - JammedWeaponEvent
+      - WeaponConfiscatedEvent
+#      - BushsEnvent
+#      - IAmWet
+#      - ShootEvent
+
