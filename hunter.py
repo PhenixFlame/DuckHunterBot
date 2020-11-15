@@ -4,10 +4,7 @@ from clients import now
 
 # ____________CONSTANTS________________
 
-HUNTSTARTDELAY = 500  # seconds
-SHOOTWAITTIME = 5  # seconds
-
-# ____________END_CONSTANTS____________
+from config import HUNTSTARTDELAY, SHOOTWAITTIME
 
 
 class Hunt(Visitor):

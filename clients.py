@@ -4,10 +4,10 @@ from logger import AsyncLogger
 from datetime import datetime, timedelta
 import asyncio
 import funcsource as fs
+from config import POST_MESSAGE_PERIOD
 
 # ____________CONSTANTS________________
 
-POST_MESSAGE_PERIOD = 0.5  # seconds
 now = fs.now
 
 # ____________END_CONSTANTS____________

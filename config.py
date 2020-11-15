@@ -47,5 +47,15 @@ DUCK_HUNT_BOT_NAME = CONFIG["DuckHuntBotName"]
 
 EVENTS = yaml.safe_load(open('resources/EVENTS.yaml', 'r'))
 DECISION_TREE = yaml.safe_load(open('resources/DECISION_TREE.yaml', 'r'))
+
+# client constants
+# Post constants
+POST_MESSAGE_PERIOD = 0.5  # delay for Post messages in seconds
+
+# Hunter constants
+# HUNTSTARTDELAY = 500  # Delay between DuckAppear and HuntStart in seconds
+HUNTSTARTDELAY = 0
+SHOOTWAITTIME = 5  # Delay between shoots in seconds
+
 # ____________END_CONSTANTS____________
 
