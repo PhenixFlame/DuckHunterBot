@@ -103,10 +103,53 @@ traceback.extract_stack(f=None, limit=None)
         словарь с регексами и тут же лежат тесты для регексов
         происходит тестирование во время импорта модуля
     
-class WrapperClient:
-    @staticmethod
-    def store_user(data):
-        return discord.User(state=WrapperClient, data=data)
+Тесты для IAmMentioned & DuckHuntBotAuthor & MyMessage
+```
+{'id': '776462372156080138',
+ 'type': 0,
+ 'content': '<@771698164461207602> > :x: A required argument is missing.',
+ 'channel_id': '773492762384531497',
+ 'author': {'id': '187636089073172481',
+  'username': 'DuckHunt',
+  'avatar': '96bac38fcb632b7799ad33ab45ca592e',
+  'discriminator': '0550',
+  'public_flags': 65536,
+  'bot': True},
+ 'attachments': [],
+ 'embeds': [],
+ 'mentions': [{'id': '771698164461207602',
+   'username': 'an_fenix',
+   'avatar': '1366a8c1f97ecc1c8424ddecb16e7939',
+   'discriminator': '2270',
+   'public_flags': 0}],
+ 'mention_roles': [],
+ 'pinned': False,
+ 'mention_everyone': False,
+ 'tts': False,
+ 'timestamp': '2020-11-12T15:04:15.495000+00:00',
+ 'edited_timestamp': None,
+ 'flags': 0}
 
+{'id': '776473123225993248',
+ 'type': 0,
+ 'content': '\\\\_O<',
+ 'channel_id': '773492762384531497',
+ 'author': {'id': '771698164461207602',
+  'username': 'an_fenix',
+  'avatar': '1366a8c1f97ecc1c8424ddecb16e7939',
+  'discriminator': '2270',
+  'public_flags': 0},
+ 'attachments': [],
+ 'embeds': [],
+ 'mentions': [],
+ 'mention_roles': [],
+ 'pinned': False,
+ 'mention_everyone': False,
+ 'tts': False,
+ 'timestamp': '2020-11-12T15:46:58.750000+00:00',
+ 'edited_timestamp': None,
+ 'flags': 0}
+ 
+ ```
 
-discord.Message(state=WrapperClient, channel='WrapperChannel', data=d[0])         
+         
