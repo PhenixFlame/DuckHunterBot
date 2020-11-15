@@ -27,6 +27,10 @@ class Event(Visitor):
     level = 20  # INFO
 
     def __init__(self, name: AnyStr, childs: List or Dict = None):
+
+        if name not in EVENTS:
+            raise TypeError(f'Event {name} not found in EVENTS')
+
         if childs:
             self.childs = list(self.get_childs(childs))
 
