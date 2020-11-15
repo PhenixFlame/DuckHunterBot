@@ -66,6 +66,7 @@ class Post:
         self.messageInterval = timedelta(seconds=delay)
         self.channel = channel
         self.nextTimeSend = now()
+        self.logger = AsyncLogger('Post').getChild(channel.name)
 
     async def send(self, text):
         """
@@ -79,5 +80,6 @@ class Post:
             await asyncio.sleep(wait_time)
 
         message = await self.channel.send(text)
+        self.logger.debug(f'message """{text}""" sended at {message.created_at}')
         self.nextTimeSend = message.created_at + self.messageInterval
 
