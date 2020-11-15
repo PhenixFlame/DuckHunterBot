@@ -51,8 +51,8 @@ class DuckHunter(Subscriber):
             f.__name__ = attr
             setattr(self, attr, f)
     
-    async def receive(self, event):
-        self.events.append(event)
+    async def receive(self, events):
+        self.events.extend(events)
     
     async def command(self, text):
         await self.post.send(text)

@@ -1,0 +1,70 @@
+AmmoEvent:
+  checker: [ regex, Ammo in weapon|MAGAZINE EMPTY ]
+  tests:
+    true:
+      - 'Ammo in weapon: '
+      - "** MAGAZINE EMPTY ** | "
+    false:
+      - ''
+      - "Ammunition in the weapon: "
+DuckAppearEvent:
+  checker: [ regex,  <:official_Duck_01_reversed:439576463436546050> ]
+  tests:
+    true: 'sss <:official_Duck_01_reversed:439576463436546050> sss'
+    false: ''
+DuckDeathEvent:
+  checker:
+    - regex
+    -
+      You killed the duck in
+      |The duck (went
+      |flew
+      |left.?
+      |dissipated
+      |chickened
+      |didn't have time
+      |doesn't want
+      |walked up
+      )|\*\*FLAPP\*\*
+  tests:
+    true:
+      - ":skull_crossbones: **{onomatopoeia}**\tYou killed the duck in {time} seconds"
+      - ("The duck went away.  ·°'\`'°-.,¸¸.·°'\`"),
+      - ("The duck went to another world.  ·°'\`'°-.,¸¸.·°'\`"),
+      - ("The duck flew over a disproportionately small gap. ·°'\`'°-.,¸¸.·°'\`"),
+      - ("The duck left.  ·°'\`'°-.,¸¸.·°'\`"),
+      - ("The duck left out of boredom.  ·°'\`'°-.,¸¸.·°'\`"),
+      - ("The duck dissipated in space and time.  ·°'\`'°-.,¸¸.·°'\`"),
+      - ("The duck chickened out.  ·°'\`'°-.,¸¸.·°'\`")]
+      - ("The duck didn't have time for this.  ·°'\`'°-.,¸¸.·°'\`"),
+      - ("The duck doesn't want to be sniped.  ·°'\`'°-.,¸¸.·°'\`"),
+      - ("The duck walked up to the lemonade stand.  ·°'\`'°-.,¸¸.·°'\`")
+      - "**FLAPP**\tFrightened by so much noise, the duck fled! CONGRATS! [missed: -1 xp]"
+    false: ''
+JammedWeaponEvent:
+  checker: [ regex,  Your weapon (is|just) jammed ]
+  tests:
+    true:
+      - "Your weapon is jammed, it must be reloaded to unjam it."
+      - "Your weapon just jammed, reload it to unjam it."
+    false: ''
+NoDuckEvent:
+  checker: [ regex,  There isn't any duck ]
+  tests:
+    true:
+      - "There isn't any duck in here, but the bullet wasn't fired because the infrared detector you added to your weapon is doing its job!"
+      - "Luckily you missed, but what were you aiming at exactly? There isn't any duck in here... [missed: -1 xp] [wild shot: -1 xp]"
+    false: ''
+WeaponConfiscatedEvent:
+  checker: [ regex,  You don't have a weapon|weapon confiscated ]
+  tests:
+    true:
+      - "**BANG**\tYou missed the duck... and shot **yourself**! Maybe you should turn your weapon a little before shooting the next time?
+          [missed: -1 xp] [hunting accident: -2 xp] [**weapon confiscated**]"
+      - "**BANG**\tYou missed the duck... and shot {player}! [missed: -1 xp] [hunting accident: -2 xp] [**weapon confiscated**]"
+      - "You don't have a weapon."
+    false: ''
+# TODO: DuckBabyEvents"
+# TODO ShootEvent
+# TODO IAmWetEvent
+# TODO BushsEnvent
