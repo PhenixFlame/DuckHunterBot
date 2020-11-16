@@ -14,8 +14,10 @@ AmmoEvent:
   checker: [ regex, Ammo in weapon|MAGAZINE EMPTY ]
   tests:
     true:
-      - 'Ammo in weapon: '
-      - "** MAGAZINE EMPTY ** | "
+      - "{greet} | Ammo in weapon: {balles_actuelles}/{balles_max} | Magazines left: {chargeurs_actuels}/{chargeurs_max}"
+      - "** MAGAZINE EMPTY ** |
+         Ammunition in the weapon: {balles_actuelles} / {balles_max} |
+         Magazines remaining: {chargeurs_actuels} / {chargeurs_max}"
     false:
       - ''
       - "Ammunition in the weapon: "
