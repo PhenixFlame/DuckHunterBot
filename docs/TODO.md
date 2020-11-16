@@ -1,7 +1,9 @@
 TODO:
-    DECISION_TREE_DICT and event_checkers
-    TESTS for classes/event_checkers
+    + DECISION_TREE_DICT and event_checkers
+    + TESTS for classes/event_checkers
     + Сделать обычной обертку логгера, а не асинхронной
+    
+    Прологгировать все создания обьектов и функции, где может быть ошибка
     
     Проблема с перезарядкой:
         1) бот не обрабатывает события в перерыве между отправкой сообщений
@@ -90,6 +92,8 @@ traceback.extract_stack(f=None, limit=None)
     перехватчики ошибок и их логгирование
    
 Какие трудности возникли и какие пришлось решить:
+    Возможная гонка событий/охот для охотника, поэтому важно сохранять порядок- необходима очередь
+    для событий необходима очередь FIFO
 
 Особенности проекта:
     Логгирование ошибок из asyncio:
@@ -98,6 +102,8 @@ traceback.extract_stack(f=None, limit=None)
             2) обертка для логгера, чтобы запускать его в стороннем потоке
     Нужны сообщения в сыром виде для тестов:
         3) используются внутренний апи библиотеки (get_raw_messages)
+    
+    Проще просить прощения, чем разрешения
     
     Специальная структура событий:
         словарь с регексами и тут же лежат тесты для регексов
@@ -152,4 +158,24 @@ traceback.extract_stack(f=None, limit=None)
  
  ```
 
-         
+Teststrings for Ammo pattern:
+```python
+
+import re
+s1 = """** MAGAZINE EMPTY ** |
+         Ammunition in the weapon: 1 / 2 |
+         Magazines remaining: 3 / 4"""
+
+s2 = "{greet} | Ammo in weapon: 1/2 | Magazines left: 3/4"
+p = [s1,s2]
+pattern = (
+    r"(Ammunition in the weapon:|Ammo in weapon:)\s*"
+    r"(\d)\s*"    r"/\s*"    r"(\d)\s*"
+    r"\|\s*"
+    r"(Magazines remaining:|Magazines left:)\s*"
+    r"(\d)\s*"    r"/\s*"    r"(\d)\s*"
+)
+
+print(re.compile(pattern).search(s1),
+re.compile(pattern).search(s2))
+```      
