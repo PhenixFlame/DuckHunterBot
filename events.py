@@ -86,10 +86,6 @@ class DecisionTree(Event):
         name = name or type(self).__name__
         super(DecisionTree, self).__init__(name, childs=tree)
 
-    def config(self):
-        self._checker = checkers.allTrue()
-        # self.level = None
-
     # TODO
     # def __repr__(self):
     # need tree paint

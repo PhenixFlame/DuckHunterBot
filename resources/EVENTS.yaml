@@ -1,5 +1,6 @@
 DecisionTree:
   level: SILENCE
+  checker: [ allTrue,  true ]
 TEST_DECISION_TREE:
   level: SILENCE
 DuckHuntBotAuthor:
