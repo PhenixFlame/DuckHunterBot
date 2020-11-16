@@ -85,6 +85,7 @@ class DuckHunter(Subscriber):
         "reload": "dhreload",
         "buybullet": "dhbuy bullet",
         "buymagazine": "dhbuy magazine",
+        "buyweapon": "dhbuy weapon",
         "hug": "dhhug",
     }
 
@@ -191,7 +192,7 @@ class DuckHunter(Subscriber):
         self.events = asyncio.queues.Queue(maxsize=MAX_SIZE_HUNTER_QUEUE)
 
     async def on_WeaponConfiscatedEvent(self, *args, **kwargs):
-        await self.reload()
+        await self.buyweapon()
 
     async def on_IAmMentioned(self, *args, **kwargs):
         pass
@@ -210,3 +211,6 @@ class DuckHunter(Subscriber):
 
     async def hug(self):
         await self.command(self.commands['hug'])
+
+    async def buyweapon(self):
+        await self.command(self.commands['buyweapon'])
