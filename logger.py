@@ -22,8 +22,10 @@ class AsyncLogger:
         with fs.log_errors(logger):
             if isinstance(name, str):
                 self.logger = logging.getLogger(name)
-            elif isinstance(name, (logging.Logger, AsyncLogger)):
+            elif isinstance(name, logging.Logger):
                 self.logger = name
+            elif isinstance(name, AsyncLogger):
+                self.logger = name.logger
             else:
                 raise TypeError('name must be Logger or str')
 
@@ -51,6 +53,8 @@ class AsyncLogger:
     def getChild(self, name):
         return AsyncLogger(self.logger.getChild(name))
 
+    def __repr__(self):
+        return str(self.logger).replace('Logger', type(self).__name__)
 
 
 
