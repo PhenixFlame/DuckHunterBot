@@ -50,6 +50,7 @@ class Visitor(abc.ABC):
         method = 'on_' + self.name
         try:
             await getattr(obj, method)(*args, **kwargs)
+            self.logger.debug(f'{type(obj)} action on {self.name}')
         except AttributeError as e:
             self.logger.debug(f'{type(obj)} doesn`t have action on {self.name}')
 
