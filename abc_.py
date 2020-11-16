@@ -1,5 +1,6 @@
 import abc
 from logger import AsyncLogger
+import asyncio
 
 
 class NoActionError(Exception):
@@ -28,7 +29,8 @@ class Publisher:
 
     async def publish(self, message):
         for s in self.subscribers:
-            await s.receive(message)
+            #        receive can be block!
+            asyncio.create_task(s.receive(message))
 
     def subscrive(self, *s):
         self.subscribers.update(s)
