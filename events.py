@@ -25,6 +25,7 @@ class Event(Visitor):
     childs = None
     _checker = checkers.allTrue()
     level = 20  # INFO
+    logger = AsyncLogger('Event')
 
     def __init__(self, name: AnyStr, childs: List or Dict = None):
 
@@ -102,7 +103,8 @@ class EventManager(Publisher, Subscriber):
         if self.channel == message.channel:
             events = await self.decisionTree.events(message)
             if events:
-                await self.publish((events, message))
+                package = events, message
+                await self.publish(package)
 
 
 class NoDecisionError(Exception):
