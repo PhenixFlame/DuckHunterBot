@@ -13,7 +13,7 @@ def author_checker(author):
     if hasattr(config, author):
         author = getattr(config, author)
 
-    async def cheker(message: discord.Message):
+    def cheker(message: discord.Message):
         return str(message.author) == author
 
     return cheker
@@ -29,13 +29,15 @@ def mention_checker(name):
     if hasattr(config, name):
         name = getattr(config, name)
 
-    async def cheker(message: discord.Message):
-        return str(message.mentions[0]) == name
+    def cheker(message: discord.Message):
+        if message.mentions:
+            return str(message.mentions[0]) == name
+        return False
 
     return cheker
 
 
-def allTrue():
+def allTrue(*args):
     return _allTrue
 
 
