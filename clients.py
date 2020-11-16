@@ -8,7 +8,7 @@ from config import POST_MESSAGE_PERIOD
 
 # ____________CONSTANTS________________
 
-now = fs.now
+now = datetime.utcnow
 
 # ____________END_CONSTANTS____________
 
