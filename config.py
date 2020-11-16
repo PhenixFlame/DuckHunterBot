@@ -56,6 +56,6 @@ POST_MESSAGE_PERIOD = 0.5  # delay for Post messages in seconds
 # HUNTSTARTDELAY = 500  # Delay between DuckAppear and HuntStart in seconds
 HUNTSTARTDELAY = 0
 SHOOTWAITTIME = 5  # Delay between shoots in seconds
-
+MAX_SIZE_HUNTER_QUEUE = 1000
 # ____________END_CONSTANTS____________
 
