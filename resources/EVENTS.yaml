@@ -3,7 +3,7 @@ DecisionTree:
 TEST_DECISION_TREE:
   level: SILENCE
 DuckHuntBotAuthor:
-  level: INFO
+  level: SILENCE
   checker: [ author_checker,  DUCK_HUNT_BOT_NAME ]
   tests: {}
 IAmMentioned:
