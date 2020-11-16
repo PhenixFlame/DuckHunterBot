@@ -18,12 +18,14 @@ class AsyncLogger:
     _loop = None
 
     def __init__(self, name):
-        if isinstance(name, str):
-            self.logger = logging.getLogger(name)
-        elif isinstance(name, logging.Logger):
-            self.logger = name
-        else:
-            raise TypeError('name must be Logger or str')
+        logger = logging.getLogger('AsyncLogger')
+        with fs.log_errors(logger):
+            if isinstance(name, str):
+                self.logger = logging.getLogger(name)
+            elif isinstance(name, (logging.Logger, AsyncLogger)):
+                self.logger = name
+            else:
+                raise TypeError('name must be Logger or str')
 
     @property
     def loop(self):
