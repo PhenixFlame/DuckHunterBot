@@ -41,10 +41,11 @@ class Visitor(abc.ABC):
     """
     raise NoActionError if there doesn't exist action for Visitor
     """
+    logger = AsyncLogger('Visitor')
 
     def __init__(self, name=None):
         self.name = name or type(self).__name__
-        self.logger = AsyncLogger(self.name)
+        self.logger = self.logger.getChild(self.name)
 
     async def action(self, obj, *args, **kwargs):
         method = 'on_' + self.name
