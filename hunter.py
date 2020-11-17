@@ -12,24 +12,26 @@ from funcsource import log_errors
 class Hunt(Visitor):
     shoottime = timedelta(seconds=HUNTSTARTDELAY)
     waittime = timedelta(seconds=SHOOTWAITTIME)
+    closed = False
 
     def __init__(self):
         super().__init__()
         self.shoottime = now() + timedelta(seconds=HUNTSTARTDELAY)
         self.logger.getChild('init').debug(f'Hunt start at [{self.shoottime}]')
+        self.closed = False
 
     async def action(self, hunter, *args, **kwargs):
-        if now() > self.shoottime:
+        if not self.closed and now() > self.shoottime:
             self.logger.getChild('action').debug(f'{hunter} shoot')
             await super(Hunt, self).action(hunter)
         self.shoottime += self.waittime
 
     async def close(self):
-
         """
         TODO: close hunter action, if Hunt close
         """
         self.logger.getChild('action').debug(f'Hunt closed')
+        self.closed = True
 
 
 pattern = (
@@ -93,7 +95,7 @@ class DuckHunter(Subscriber):
 
     def __init__(self, post: Post):
         self.events = asyncio.queues.Queue(maxsize=MAX_SIZE_HUNTER_QUEUE)
-        self.hunts = deque()
+        self.hunts = deque([Hunt(), Hunt(), Hunt()])
         self.post = post
         self.name = post.name
         self.logger = AsyncLogger('Hunter').getChild(post.name)
@@ -120,40 +122,45 @@ class DuckHunter(Subscriber):
             while True:
                 await self.checkammo()
 
-                for hunt in self.hunts:
+                for hunt in list(self.hunts):
                     await hunt.action(self)
 
                 await self.checkevents()
-
-    async def _shoot(self):
-        self.logger.getChild('shoot').debug(f'shoot')
-        if not self.ammo.bullets:
-            await self.checkammo()
-        self.ammo.shoot()
-        await self.shoot()
 
     async def checkammo(self):
         self.logger.getChild('checkammo').debug(f'{self.ammo}')
         if not self.ammo.bullets:
             if self.ammo.magazines or self.ammo.magazines is None:
                 await self.reload()
-                await self.wait_event()
             elif not self.ammo.magazines:
                 if self.ammo.n_bullets > 1:
                     await self.buymagazine()
                     self.ammo.magazines += 1
-                    await self.wait_event()
                 else:
                     await self.buybullet()
                     self.ammo.bullets += 1
-                    await self.wait_event()
+            else:
+                return
+
+            await self.checkevents()
+
+        else:
+            return
 
     async def wait_event(self):
         self.logger.getChild('wait_event').debug(f'await event')
-        events, message = await self.events.get()
-        for event in events:
-            await event.action(self, message=message)
-        self.events.task_done()
+        try:
+
+            if self.hunts:
+                events, message = await asyncio.wait_for(self.events.get(), SHOOTWAITTIME)
+            else:
+                events, message = await self.events.get()
+
+            self.events.task_done()
+            for event in events:
+                await event.action(self, message=message)
+        except asyncio.TimeoutError:
+            self.logger.getChild('wait_event').debug(f'timeout waiting event')
 
     async def checkevents(self):
         # if self.events.empty() and not self.hunts:
@@ -177,7 +184,7 @@ class DuckHunter(Subscriber):
         self.hunts.append(Hunt())
 
     async def on_Hunt(self):
-        await self._shoot()
+        await self.shoot()
 
     async def on_DuckDeathEvent(self, *args, **kwargs):
         if self.hunts:
@@ -188,8 +195,9 @@ class DuckHunter(Subscriber):
         await self.reload()
 
     async def on_NoDuckEvent(self, *args, **kwargs):
-        del self.events
-        self.events = asyncio.queues.Queue(maxsize=MAX_SIZE_HUNTER_QUEUE)
+        while self.hunts:
+            hunt = self.hunts.popleft()
+            await hunt.close()
 
     async def on_WeaponConfiscatedEvent(self, *args, **kwargs):
         await self.buyweapon()
@@ -198,7 +206,15 @@ class DuckHunter(Subscriber):
         pass
 
     async def shoot(self):
-        await self.command(self.commands['shoot'])
+        self.logger.getChild('shoot').debug(f'shoot')
+        if self.ammo.bullets:
+            await self.command(self.commands['shoot'])
+            self.ammo.shoot()
+
+        if not self.ammo.bullets:
+            await self.checkammo()
+        else:
+            await self.checkevents()
 
     async def reload(self):
         await self.command(self.commands['reload'])
