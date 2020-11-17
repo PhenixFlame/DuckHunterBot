@@ -98,13 +98,20 @@ class EventManager(Publisher, Subscriber):
     def __init__(self, channel: discord.TextChannel, decisionTree: DecisionTree):
         self.channel = channel
         self.decisionTree = decisionTree
+        self.logger = AsyncLogger(str(self))
 
     async def receive(self, message: discord.Message):
+
+        self.logger.debug('receive message')
+
         if self.channel == message.channel:
             events = await self.decisionTree.events(message)
             if events:
                 package = events, message
                 await self.publish(package)
+
+    def __repr__(self):
+        return f"EventManager({self.channel.name}, {self.decisionTree.name})"
 
 
 class NoDecisionError(Exception):
