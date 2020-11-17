@@ -65,6 +65,10 @@ JammedWeaponEvent:
       - "Your weapon is jammed, it must be reloaded to unjam it."
       - "Your weapon just jammed, reload it to unjam it."
     false: ''
+    actions:
+      DuckHunter:
+        - command
+        - dhreload
 NoDuckEvent:
   checker: [ regex,  There isn't any duck ]
   tests:
@@ -81,6 +85,10 @@ WeaponConfiscatedEvent:
       - "**BANG**\tYou missed the duck... and shot {player}! [missed: -1 xp] [hunting accident: -2 xp] [**weapon confiscated**]"
       - "You don't have a weapon."
     false: ''
+  actions:
+    DuckHunter:
+      - command
+      - dhbuy weapon
 # TODO: DuckBabyEvents"
 # TODO ShootEvent
 # TODO IAmWetEvent

@@ -109,7 +109,7 @@ class DuckHunter(Subscriber):
             else:
                 await self.events.put(package)
 
-    async def command(self, text):
+    async def command(self, text, message=None):
         self.logger.getChild('command').debug(f'command_[{text}]')
         await self.post.send(text)
 
@@ -189,19 +189,10 @@ class DuckHunter(Subscriber):
             hunt = self.hunts.popleft()
             await hunt.close()
 
-    async def on_JammedWeaponEvent(self, *args, **kwargs):
-        await self.reload()
-
     async def on_NoDuckEvent(self, *args, **kwargs):
         while self.hunts:
             hunt = self.hunts.popleft()
             await hunt.close()
-
-    async def on_WeaponConfiscatedEvent(self, *args, **kwargs):
-        await self.buyweapon()
-
-    async def on_IAmMentioned(self, *args, **kwargs):
-        pass
 
     async def shoot(self):
         self.logger.getChild('shoot').debug(f'shoot')
