@@ -58,6 +58,30 @@ DuckDeathEvent:
       - ("The duck walked up to the lemonade stand.  ·°'\`'°-.,¸¸.·°'\`")
       - "**FLAPP**\tFrightened by so much noise, the duck fled! CONGRATS! [missed: -1 xp]"
     false: ''
+DuckNoCloverEvent:
+  checker:
+    - regex
+    - _X<   *COUAC*\s+\[\d+\]
+  tests:
+    true:
+      - ":skull_crossbones: **{onomatopoeia}**\tYou killed the duck in {time} seconds ...  _X<   COUAC   [10 exp]"
+    false: ''
+  actions:
+    DuckHunter:
+      - command
+      - dhbuy clover
+DuckFrightenedEvent:
+  checker:
+    - regex
+    - \*\*FLAPP\*\*
+  tests:
+    true:
+      - "**FLAPP**\tFrightened by so much noise, the duck fled! CONGRATS! [missed: -1 xp]"
+    false: ''
+  actions:
+    DuckHunter:
+      - command
+      - dhbuy silencer
 JammedWeaponEvent:
   checker: [ regex,  Your weapon (is|just) jammed ]
   tests:
@@ -93,3 +117,16 @@ WeaponConfiscatedEvent:
 # TODO ShootEvent
 # TODO IAmWetEvent
 # TODO BushsEnvent
+
+IAmAuthor:
+  level: SILENCE
+  checker: [ author_checker,  SELF_NAME ]
+  tests: {}
+MyCommand:
+  level: INFO
+  checker: [ regex,  Hi Hunter ]
+  tests: {}
+  actions:
+    DuckHunter:
+      - command
+      - "HunterBot: hello"

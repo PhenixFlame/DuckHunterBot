@@ -1,6 +1,8 @@
 DuckHuntBotAuthor:
   - NoDuckEvent
-  - DuckDeathEvent
+  - DuckDeathEvent:
+      - DuckFrightenedEvent
+      - DuckNoCloverEvent
   - DuckAppearEvent
 #  - DuckBabyEvents
   - IAmMentioned:
@@ -10,4 +12,5 @@ DuckHuntBotAuthor:
 #      - BushsEnvent
 #      - IAmWet
 #      - ShootEvent
-
+IAmAuthor:
+  MyCommand
