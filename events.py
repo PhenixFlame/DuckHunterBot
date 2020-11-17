@@ -100,11 +100,11 @@ class EventManager(Publisher, Subscriber):
     def __init__(self, channel: discord.TextChannel, decisionTree: DecisionTree):
         self.channel = channel
         self.decisionTree = decisionTree
-        self.logger = AsyncLogger(str(self))
+        self.logger = AsyncLogger(type(self).__name__)
 
     async def receive(self, message: discord.Message):
 
-        self.logger.debug('receive message')
+        self.logger.debug(f'{self} receive message')
 
         if self.channel == message.channel:
             events = await self.decisionTree.events(message)
