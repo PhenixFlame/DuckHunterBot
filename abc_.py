@@ -49,6 +49,7 @@ class Visitor(abc.ABC):
     def __init__(self, name=None):
         self.name = name or type(self).__name__
         self.logger = self.logger.getChild(self.name)
+        self.actions = dict()
 
     async def action(self, obj, *args, **kwargs):
         method = 'on_' + self.name
@@ -56,7 +57,12 @@ class Visitor(abc.ABC):
             await getattr(obj, method)(*args, **kwargs)
             self.logger.debug(f'{type(obj)} action on {self.name}')
         except AttributeError:
-            self.logger.debug(f'{type(obj)} doesn`t have action on {self.name}')
+            try:
+                method, *args = self.actions[type(obj).__name__]
+                await getattr(obj, method)(*args, **kwargs)
+                self.logger.debug(f'{type(obj)} action on {self.name}')
+            except (KeyError, AttributeError):
+                self.logger.debug(f'{type(obj)} doesn`t have action on {self.name}')
 
     def __repr__(self):
         return f"{type(self).__name__}({self.name})"
