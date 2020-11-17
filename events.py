@@ -51,6 +51,9 @@ class Event(Visitor):
                 checker, pattern = config['checker']
                 self._checker = getattr(checkers, checker)(pattern)
 
+            if 'actions' in config:
+                self.actions = config['actions']
+
             level = config.get('level', 'INFO')
             self.level = LEVELS.get(level, 20)
         # self._pattern = re.compile(pattern)
