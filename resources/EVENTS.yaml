@@ -23,7 +23,9 @@ AmmoEvent:
       - ''
       - "Ammunition in the weapon: "
 DuckAppearEvent:
-  checker: [ regex,  <:official_Duck_01_reversed:439576463436546050> ]
+  checker:
+    - regex
+    - <:official_Duck_01_reversed:439576463436546050>|try to hug the duck.?
   tests:
     true: 'sss <:official_Duck_01_reversed:439576463436546050> sss'
     false: ''
