@@ -1,8 +1,9 @@
-import logging
 import asyncio
-from logging.config import dictConfig
-import funcsource as fs
+import logging
 import os
+from logging.config import dictConfig
+
+import funcsource as fs
 
 DIR = os.path.dirname(os.path.abspath(__file__)) + '/'
 loggerDictConfig = fs.read_file(DIR + 'logger_config.yaml')
@@ -55,6 +56,3 @@ class AsyncLogger:
 
     def __repr__(self):
         return str(self.logger).replace('Logger', type(self).__name__)
-
-
-

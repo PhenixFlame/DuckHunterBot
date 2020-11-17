@@ -1,12 +1,13 @@
-from abc_ import Subscriber, Visitor
-from datetime import datetime, timedelta
-from clients import now, Post
-from logger import AsyncLogger
-from collections import deque
-import re
-from config import HUNTSTARTDELAY, SHOOTWAITTIME, MAX_SIZE_HUNTER_QUEUE
 import asyncio
+import re
+from collections import deque
+from datetime import timedelta
+
+from abc_ import Subscriber, Visitor
+from clients import now, Post
+from config import HUNTSTARTDELAY, SHOOTWAITTIME, MAX_SIZE_HUNTER_QUEUE
 from funcsource import log_errors
+from logger import AsyncLogger
 
 
 class Hunt(Visitor):
@@ -53,7 +54,7 @@ class Ammo:
     def __init__(self, hunter):
         self.logger = AsyncLogger(hunter.logger).getChild('Ammo')
 
-    def _renew(self, message):
+    def renew(self, message):
         with log_errors(self.logger):
             match = self.pattern.search(message.content)
             if match:
@@ -70,9 +71,6 @@ class Ammo:
             self.bullets -= 1
         else:
             self.logger.error(f'shoot without bullets')
-
-    async def renew(self, message):
-        self._renew(message)
 
     def __repr__(self):
         return 'Ammo(' \
@@ -178,7 +176,7 @@ class DuckHunter(Subscriber):
 
     # EVENT reactions
     async def on_AmmoEvent(self, *args, message, **kwargs):
-        self.ammo._renew(message)
+        self.ammo.renew(message)
 
     async def on_DuckAppearEvent(self, *args, **kwargs):
         self.hunts.append(Hunt())

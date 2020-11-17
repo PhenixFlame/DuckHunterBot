@@ -1,5 +1,7 @@
-import discord
 import re
+
+import discord
+
 import config
 
 

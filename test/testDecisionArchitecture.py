@@ -1,10 +1,6 @@
-import yaml
-import funcsource as fs
-import io
-from abc_ import Visitor
 import discord
 
-
+from abc_ import Visitor
 
 yamls = """
 NoDuckEvent: '"There isn''t any duck" in message.content'
@@ -39,7 +35,6 @@ testmessage = TestMessage()
 if __name__ == '__main__':
     xx = testevent.check(testmessage)
     print(xx)
-
 
 # for History
 EVAL_EVENTS = {

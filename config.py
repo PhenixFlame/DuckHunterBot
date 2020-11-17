@@ -58,4 +58,3 @@ HUNTSTARTDELAY = 0
 SHOOTWAITTIME = 5  # Delay between shoots in seconds
 MAX_SIZE_HUNTER_QUEUE = 1000
 # ____________END_CONSTANTS____________
-

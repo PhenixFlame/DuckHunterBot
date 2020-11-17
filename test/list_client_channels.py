@@ -1,5 +1,5 @@
 from clients import DiscordClient
-from config import TOKEN, GUILD_HUNT, CHANNEL_HUNT
+from config import TOKEN
 
 # TOKEN = settings['token']['bot']
 
@@ -19,7 +19,3 @@ async def get_hystory():
 
 loop.create_task(get_hystory())
 client.run(TOKEN)
-
-
-
-

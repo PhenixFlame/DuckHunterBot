@@ -1,6 +1,7 @@
 import abc
-from logger import AsyncLogger
 import asyncio
+
+from logger import AsyncLogger
 
 
 class NoActionError(Exception):
@@ -54,7 +55,7 @@ class Visitor(abc.ABC):
         try:
             await getattr(obj, method)(*args, **kwargs)
             self.logger.debug(f'{type(obj)} action on {self.name}')
-        except AttributeError as e:
+        except AttributeError:
             self.logger.debug(f'{type(obj)} doesn`t have action on {self.name}')
 
     def __repr__(self):

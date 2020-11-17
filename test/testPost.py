@@ -1,8 +1,7 @@
-from config import TOKEN, BOTFLAG, GUILD_HUNT, CHANNEL_HUNT
-from events import EventManager, DecisionTree
-from hunter import DuckHunter
 from clients import DiscordClient, Post
+from config import TOKEN, BOTFLAG, GUILD_HUNT, CHANNEL_HUNT
 from logger import AsyncLogger
+
 client = DiscordClient()
 
 

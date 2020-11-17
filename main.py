@@ -1,9 +1,9 @@
+from clients import DiscordClient, Post
 from config import TOKEN, BOTFLAG, GUILD_HUNT, CHANNEL_HUNT, DECISION_TREE
 from events import EventManager, DecisionTree
-from hunter import DuckHunter
-from clients import DiscordClient, Post
-from logger import AsyncLogger
 from funcsource import log_errors
+from hunter import DuckHunter
+from logger import AsyncLogger
 
 client = DiscordClient()
 

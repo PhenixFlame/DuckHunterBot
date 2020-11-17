@@ -1,5 +1,5 @@
 from logger import AsyncLogger
-from clients import DiscordClient, Post
+from clients import DiscordClient
 from abc_ import Subscriber
 import discord
 from config import TOKEN, GUILD_HUNT, CHANNEL_HUNT

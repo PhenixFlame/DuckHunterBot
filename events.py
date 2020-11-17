@@ -1,10 +1,12 @@
-from abc_ import Publisher, Subscriber, Visitor
-import checkers
-from config import EVENTS
-from logger import AsyncLogger
-import discord
 from typing import AnyStr, Dict, List
+
+import discord
+
+import checkers
+from abc_ import Publisher, Subscriber, Visitor
+from config import EVENTS
 from funcsource import log_errors
+from logger import AsyncLogger
 
 LEVELS = {
     'INFO': 20,

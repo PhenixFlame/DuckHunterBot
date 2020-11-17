@@ -66,4 +66,3 @@ def test_Event_yaml_tests(event):
                 errors.append(test_text)
                 # errors.append((expected, value))
     assert not errors
-
