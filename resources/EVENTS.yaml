@@ -8,7 +8,7 @@ DuckHuntBotAuthor:
   checker: [ author_checker,  DUCK_HUNT_BOT_NAME ]
   tests: {}
 IAmMentioned:
-  level: INFO
+  level: SILENCE
   checker: [ mention_checker,  SELF_NAME ]
   tests: {}
 AmmoEvent:
