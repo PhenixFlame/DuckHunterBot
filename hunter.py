@@ -108,7 +108,7 @@ class DuckHunter(Subscriber):
 
     def __init__(self, post: Post):
         self.events = asyncio.queues.Queue(maxsize=MAX_SIZE_HUNTER_QUEUE)
-        self.hunts = deque([Hunt(), Hunt(), Hunt()])
+        self.hunts = deque([Hug()] + [Hunt() for i in range(10)])
         self.post = post
         self.name = post.name
         self.logger = AsyncLogger('Hunter').getChild(post.name)
