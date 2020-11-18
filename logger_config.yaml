@@ -28,6 +28,9 @@ handlers:
 loggers:
   discord:
     level: ERROR
+  EventManager:
+    level: ERROR
+
 
 root:
   level: DEBUG
