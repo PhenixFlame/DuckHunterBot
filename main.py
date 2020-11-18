@@ -4,6 +4,8 @@ from events import EventManager, DecisionTree
 from funcsource import log_errors
 from hunter import DuckHunter
 from logger import AsyncLogger
+import asyncio
+
 
 client = DiscordClient()
 
@@ -27,6 +29,10 @@ async def initialization():
 
         client.loop.create_task(duck_hunter.main_loop())
         logger.debug('end initialization')
+
+    while True:
+        await asyncio.sleep(180)
+        await post.send('dhbuy 20')
 
 client.loop.create_task(initialization())
 client.run(TOKEN, bot=BOTFLAG)
