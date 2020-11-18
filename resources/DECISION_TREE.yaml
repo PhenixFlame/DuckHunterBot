@@ -4,13 +4,14 @@ DuckHuntBotAuthor:
       - DuckFrightenedEvent
       - DuckNoCloverEvent
   - DuckAppearEvent
+  - BabyDuckAppear
+  - BabyDuckAwait
 #  - DuckBabyEvents
   - IAmMentioned:
       - AmmoEvent
       - JammedWeaponEvent
       - WeaponConfiscatedEvent
+      - IAmWetEvent
 #      - BushsEnvent
-#      - IAmWet
-#      - ShootEvent
 IAmAuthor:
   MyCommand

@@ -113,9 +113,31 @@ WeaponConfiscatedEvent:
     DuckHunter:
       - command
       - dhbuy weapon
-# TODO: DuckBabyEvents"
-# TODO ShootEvent
-# TODO IAmWetEvent
+IAmWetEvent:
+  checker: [ regex,  "Your clothes are wet, you can't go hunting" ]
+  tests:
+    true:
+      - "Your clothes are wet, you can't go hunting! Wait 59 minutes."
+    false: ''
+  actions:
+    DuckHunter:
+      - command
+      - dhbuy clothes
+BabyDuckAppear:
+  checker: [ regex,  "COIN" ]
+  tests:
+    true:
+      - "-,,.-'`'°-,,.-''` :BabyDuck_01: < COIN"
+    false: ''
+BabyDuckAwait:
+  checker: [ regex,  "baby duck left|killed the baby duck" ]
+  tests:
+    true:
+      - "The baby duck left to take a little nap somewhere"
+      - "<:cmd_Hug_01:442695336348221451> **SMACK**\tYou hugged the baby duck, and now it is really happy! [3 exp]\nThe baby duck left, feeling loved"
+      - "You killed the baby duck in"
+    false: ''
+
 # TODO BushsEnvent
 
 IAmAuthor:
