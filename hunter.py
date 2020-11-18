@@ -18,11 +18,11 @@ class Hunt(Visitor):
     def __init__(self):
         super().__init__()
         self.shoottime = now() + timedelta(seconds=HUNTSTARTDELAY)
-        self.logger.getChild('init').debug(f'Hunt start at [{self.shoottime}]')
+        self.logger.getChild('init').debug(f'{self} start at [{self.shoottime}]')
         self.closed = False
 
     async def action(self, hunter, *args, **kwargs):
-        if not self.closed and now() > self.shoottime:
+        if not self.closed and (now() > self.shoottime or len(hunter.hunts) > 2):
             self.logger.getChild('action').debug(f'{hunter} shoot')
             await super(Hunt, self).action(hunter)
         self.shoottime += self.waittime
@@ -31,8 +31,23 @@ class Hunt(Visitor):
         """
         TODO: close hunter action, if Hunt close
         """
-        self.logger.getChild('action').debug(f'Hunt closed')
+        self.logger.getChild('close').debug(f'{self} closed')
         self.closed = True
+
+    def __repr__(self):
+        return type(self).__name__
+
+
+class Hug(Hunt):
+    shoottime = timedelta(seconds=HUNTSTARTDELAY)
+    waittime = timedelta(seconds=SHOOTWAITTIME)
+    closed = False
+
+    async def action(self, hunter, *args, **kwargs):
+        if not self.closed and (now() > self.shoottime or len(hunter.hunts) > 2) and self == hunter.hunts[0]:
+            self.logger.getChild('action').debug(f'{hunter} hug')
+            await super(Hunt, self).action(hunter)
+        self.shoottime += self.waittime
 
 
 pattern = (
@@ -184,7 +199,19 @@ class DuckHunter(Subscriber):
     async def on_Hunt(self):
         await self.shoot()
 
+    async def on_Hug(self):
+        await self.command('dhhug')
+        await self.checkevents()
+
+    async def on_BabyDuckAppear(self, *args, **kwargs):
+        self.hunts.append(Hug())
+
     async def on_DuckDeathEvent(self, *args, **kwargs):
+        if self.hunts:
+            hunt = self.hunts.popleft()
+            await hunt.close()
+
+    async def on_BabyDuckAwait(self, *args, **kwargs):
         if self.hunts:
             hunt = self.hunts.popleft()
             await hunt.close()
