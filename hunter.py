@@ -25,7 +25,9 @@ class Hunt(Visitor):
         if not self.closed and (now() > self.shoottime or len(hunter.hunts) > 2):
             self.logger.getChild('action').debug(f'{hunter} shoot')
             await super(Hunt, self).action(hunter)
-        self.shoottime += self.waittime
+            self.shoottime += self.waittime
+        else:
+            self.logger.getChild('action').debug(f'{hunter} wait {(self.shoottime - now()).total_seconds()} seconds')
 
     async def close(self):
         """
@@ -47,7 +49,7 @@ class Hug(Hunt):
         if not self.closed and (now() > self.shoottime or len(hunter.hunts) > 2) and self == hunter.hunts[0]:
             self.logger.getChild('action').debug(f'{hunter} hug')
             await super(Hunt, self).action(hunter)
-        self.shoottime += self.waittime
+            self.shoottime += self.waittime
 
 
 pattern = (
