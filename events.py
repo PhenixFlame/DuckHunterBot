@@ -60,6 +60,11 @@ class Event(Visitor):
         # self._checker_ = lambda message: self._pattern.search(message.content)
 
     def get_childs(self, i):
+        """
+        build composition of Events
+        :param i: next leaf of DECISION_TREE or DECISION_TREE
+        :return:
+        """
         if isinstance(i, str):
             yield Event(i)
         elif isinstance(i, dict):
@@ -117,8 +122,3 @@ class EventManager(Publisher, Subscriber):
 
     def __repr__(self):
         return f"EventManager({self.channel.name}, {self.decisionTree.name})"
-
-
-class NoDecisionError(Exception):
-    def __init__(self, message):
-        self.message = message

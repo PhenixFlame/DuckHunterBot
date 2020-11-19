@@ -4,12 +4,6 @@ import asyncio
 from logger import AsyncLogger
 
 
-class NoActionError(Exception):
-    def __init__(self, message, e):
-        self.message = message
-        self.error = e
-
-
 class Subscriber(abc.ABC):
     @abc.abstractmethod
     async def receive(self, message):

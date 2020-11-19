@@ -6,7 +6,6 @@ DuckHuntBotAuthor:
   - DuckAppearEvent
   - BabyDuckAppear
   - BabyDuckAwait
-#  - DuckBabyEvents
   - IAmMentioned:
       - AmmoEvent
       - JammedWeaponEvent
