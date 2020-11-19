@@ -1,0 +1,745 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>README</title><link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --node-fill: #ECECFF; --node-border: #CCCCFF; --cluster-fill: #ffffde; --cluster-border: #aaaa33; --note-fill: #fff5ad; --note-border: #aaaa33; --mermaid-color: var(--text-color); }
+.label { font-family: var(--mermaid-font-family); color: rgb(51, 51, 51); }
+.label text { fill: rgb(51, 51, 51); }
+.node rect, .node circle, .node ellipse, .node polygon { fill: var(--node-fill); stroke: rgb(147, 112, 219); stroke-width: 1px; }
+.node .label { text-align: center; }
+.node.clickable { cursor: pointer; }
+.arrowheadPath { fill: var(--text-color); }
+.edgePath .path { stroke: var(--text-color); stroke-width: 1.5px; }
+.edgeLabel { background-color: rgb(232, 232, 232); text-align: center; }
+.cluster rect { fill: var(--cluster-fill); stroke: var(--cluster-border); stroke-width: 1px; }
+.cluster text { fill: var(--text-color); }
+div.mermaidTooltip { position: absolute; text-align: center; max-width: 200px; padding: 2px; font-family: var(--mermaid-font-family); font-size: 12px; background: var(--cluster-fill); border: 1px solid var(--cluster-border); border-radius: 2px; pointer-events: none; z-index: 100; }
+.actor { stroke: var(--node-border); fill: var(--node-fill); }
+text.actor { fill: black; stroke: none; }
+.actor-line { stroke: grey; }
+.messageLine0 { stroke-width: 1.5; stroke: var(--text-color); }
+.messageLine1 { stroke-width: 1.5; stroke: var(--text-color); }
+#arrowhead { fill: var(--text-color); }
+.sequenceNumber { fill: white; }
+#sequencenumber { fill: var(--text-color); }
+#crosshead path { fill: var(--text-color)  !important; stroke: var(--text-color)  !important; }
+.messageText { fill: var(--text-color); stroke: none; }
+.labelBox { stroke: var(--node-border); fill: var(--node-fill); }
+.labelText { fill: black; stroke: none; }
+.loopText { fill: black; stroke: none; }
+.loopLine { stroke-width: 2; stroke: var(--node-border); }
+.note { stroke: var(--cluster-border); fill: rgb(255, 245, 173); }
+.noteText { fill: black; stroke: none; font-family: var(--mermaid-font-family); font-size: 14px; }
+.activation0 { fill: rgb(244, 244, 244); stroke: rgb(102, 102, 102); }
+.activation1 { fill: rgb(244, 244, 244); stroke: rgb(102, 102, 102); }
+.activation2 { fill: rgb(244, 244, 244); stroke: rgb(102, 102, 102); }
+.mermaid-main-font { font-family: var(--mermaid-font-family); }
+.section { stroke: none; opacity: 0.2; }
+.section0 { fill: rgba(102, 102, 255, 0.49); }
+.section2 { fill: rgb(255, 244, 0); }
+.section1, .section3 { fill: white; opacity: 0.2; }
+.sectionTitle0 { fill: var(--text-color); }
+.sectionTitle1 { fill: var(--text-color); }
+.sectionTitle2 { fill: var(--text-color); }
+.sectionTitle3 { fill: var(--text-color); }
+.sectionTitle { text-anchor: start; font-size: 11px; font-family: var(--mermaid-font-family); }
+.grid .tick { stroke: lightgrey; opacity: 0.3; shape-rendering: crispedges; }
+.grid .tick text { font-family: var(--mermaid-font-family); }
+.grid path { stroke-width: 0; }
+.today { fill: none; stroke: red; stroke-width: 2px; }
+.task { stroke-width: 2; }
+.taskText { text-anchor: middle; font-family: var(--mermaid-font-family); }
+.taskText:not([font-size]) { font-size: 11px; }
+.taskTextOutsideRight { fill: black; text-anchor: start; font-size: 11px; font-family: var(--mermaid-font-family); }
+.taskTextOutsideLeft { fill: black; text-anchor: end; font-size: 11px; }
+.task.clickable { cursor: pointer; }
+.taskText.clickable { cursor: pointer; font-weight: bold; fill: rgb(0, 49, 99) !important; }
+.taskTextOutsideLeft.clickable { cursor: pointer; font-weight: bold; fill: rgb(0, 49, 99) !important; }
+.taskTextOutsideRight.clickable { cursor: pointer; font-weight: bold; fill: rgb(0, 49, 99) !important; }
+.taskText0, .taskText1, .taskText2, .taskText3 { fill: white; }
+.task0, .task1, .task2, .task3 { fill: rgb(138, 144, 221); stroke: rgb(83, 79, 188); }
+.taskTextOutside0, .taskTextOutside2 { fill: black; }
+.taskTextOutside1, .taskTextOutside3 { fill: black; }
+.active0, .active1, .active2, .active3 { fill: rgb(191, 199, 255); stroke: rgb(83, 79, 188); }
+.activeText0, .activeText1, .activeText2, .activeText3 { fill: black !important; }
+.done0, .done1, .done2, .done3 { stroke: grey; fill: lightgrey; stroke-width: 2; }
+.doneText0, .doneText1, .doneText2, .doneText3 { fill: black !important; }
+.crit0, .crit1, .crit2, .crit3 { stroke: rgb(255, 136, 136); fill: red; stroke-width: 2; }
+.activeCrit0, .activeCrit1, .activeCrit2, .activeCrit3 { stroke: rgb(255, 136, 136); fill: rgb(191, 199, 255); stroke-width: 2; }
+.doneCrit0, .doneCrit1, .doneCrit2, .doneCrit3 { stroke: rgb(255, 136, 136); fill: lightgrey; stroke-width: 2; cursor: pointer; shape-rendering: crispedges; }
+.milestone { transform: rotate(45deg) scale(0.8, 0.8); }
+.milestoneText { font-style: italic; }
+.doneCritText0, .doneCritText1, .doneCritText2, .doneCritText3 { fill: black !important; }
+.activeCritText0, .activeCritText1, .activeCritText2, .activeCritText3 { fill: black !important; }
+.titleText { text-anchor: middle; font-size: 18px; fill: black; font-family: var(--mermaid-font-family); }
+g.classGroup text { fill: rgb(147, 112, 219); stroke: none; font-family: var(--mermaid-font-family); font-size: 10px; }
+g.classGroup text .title { font-weight: bolder; }
+g.classGroup rect { fill: var(--node-fill); stroke: rgb(147, 112, 219); }
+g.classGroup line { stroke: rgb(147, 112, 219); stroke-width: 1; }
+.classLabel .box { stroke: none; stroke-width: 0; fill: var(--node-fill); opacity: 0.5; }
+.classLabel .label { fill: rgb(147, 112, 219); font-size: 10px; }
+.relation { stroke: rgb(147, 112, 219); stroke-width: 1; fill: none; }
+#compositionStart { fill: rgb(147, 112, 219); stroke: rgb(147, 112, 219); stroke-width: 1; }
+#compositionEnd { fill: rgb(147, 112, 219); stroke: rgb(147, 112, 219); stroke-width: 1; }
+#aggregationStart { fill: var(--node-fill); stroke: rgb(147, 112, 219); stroke-width: 1; }
+#aggregationEnd { fill: var(--node-fill); stroke: rgb(147, 112, 219); stroke-width: 1; }
+#dependencyStart { fill: rgb(147, 112, 219); stroke: rgb(147, 112, 219); stroke-width: 1; }
+#dependencyEnd { fill: rgb(147, 112, 219); stroke: rgb(147, 112, 219); stroke-width: 1; }
+#extensionStart { fill: rgb(147, 112, 219); stroke: rgb(147, 112, 219); stroke-width: 1; }
+#extensionEnd { fill: rgb(147, 112, 219); stroke: rgb(147, 112, 219); stroke-width: 1; }
+.commit-id, .commit-msg, .branch-label { fill: lightgrey; color: lightgrey; font-family: var(--mermaid-font-family); }
+.pieTitleText { text-anchor: middle; font-size: 25px; fill: var(--text-color); font-family: var(--mermaid-font-family); }
+.slice { font-family: var(--mermaid-font-family); }
+g.stateGroup text { fill: rgb(147, 112, 219); stroke: none; font-size: 10px; font-family: var(--mermaid-font-family); }
+g.stateGroup text { fill: rgb(147, 112, 219); stroke: none; font-size: 10px; }
+g.stateGroup .state-title { font-weight: bolder; fill: black; }
+g.stateGroup rect { fill: var(--node-fill); stroke: rgb(147, 112, 219); }
+g.stateGroup line { stroke: rgb(147, 112, 219); stroke-width: 1; }
+.transition { stroke: rgb(147, 112, 219); stroke-width: 1; fill: none; }
+.stateGroup .composit { fill: white; border-bottom: 1px; }
+.state-note { stroke: var(--cluster-border); fill: rgb(255, 245, 173); }
+.state-note text { fill: black; stroke: none; font-size: 10px; }
+.stateLabel .box { stroke: none; stroke-width: 0; fill: var(--node-fill); opacity: 0.5; }
+.stateLabel text { fill: black; font-size: 10px; font-weight: bold; font-family: var(--mermaid-font-family); }
+.statediagram-cluster rect { fill: var(--node-fill); stroke: rgb(147, 112, 219); stroke-width: 1px; }
+.statediagram-cluster rect.outer { rx: 5px; ry: 5px; }
+.statediagram-state .divider { stroke: rgb(147, 112, 219); }
+.statediagram-state .title-state { rx: 5px; ry: 5px; }
+.statediagram-cluster.statediagram-cluster .inner { fill: white; }
+.statediagram-cluster.statediagram-cluster-alt .inner { fill: rgb(224, 224, 224); }
+.statediagram-cluster .inner { rx: 0; ry: 0; }
+.statediagram-state rect.basic { rx: 5px; ry: 5px; }
+.statediagram-state rect.divider { stroke-dasharray: 10, 10; fill: rgb(239, 239, 239); }
+.note-edge { stroke-dasharray: 5; }
+.statediagram-note rect { stroke: var(--cluster-border); fill: rgb(255, 245, 173); stroke-width: 1px; rx: 0; ry: 0; }
+.node circle.state-start { fill: black; stroke: black; }
+.node circle.state-end { fill: black; stroke: white; stroke-width: 1.5; }
+#statediagram-barbEnd { fill: rgb(147, 112, 219); }
+.node text { font-size: 14px; }
+div.mermaidTooltip { position: absolute; text-align: center; max-width: 200px; padding: 2px; font-family: var(--mermaid-font-family); font-size: 12px; background: var(--cluster-fill); border: 1px solid var(--cluster-border); border-radius: 2px; pointer-events: none; z-index: 100; }
+#write .md-diagram-panel .md-diagram-panel-preview div { width: initial; }
+
+
+:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 40px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none 0s ease 0s; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; margin-top: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+svg[id^="mermaidChart"] { line-height: 1em; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+mark .md-meta { color: rgb(0, 0, 0); opacity: 0.3 !important; }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow: auto hidden; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; overflow-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { overflow-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border-top: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table tr th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr th:first-child,
+table tr td:first-child {
+    margin-top: 0;
+}
+table tr th:last-child,
+table tr td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+.html-for-mac .context-menu {
+    --item-hover-bg-color: #E6F0FE;
+}
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+
+</style>
+</head>
+<body class='typora-export'>
+<div id='write'  class=''><h2><a name="introduction" class="md-header-anchor"></a><span>Introduction</span></h2><p><span>I use this repository as one of my portfolio. However, you can use it as you want.</span></p><p><a href='https://github.com/fenixsign/DuckHunterBot/issues/1'><span>Issue for comments and reviews</span></a></p><p><span>This is a repository of fun project for Discord Bot. Bot is written with asyncio python library. For connect it use discord client and api. Main aim of this bot is to play with </span><a href='https://github.com/DuckHunt-discord/DHV3'><span>DuckHuntBot</span></a><span> on Discord chat.</span></p><p><span>Advantages of this project:</span></p><ul><li><span>good structure and architecture</span></li><li><span>asyncio </span></li><li><span>Events tree</span></li><li><span>Events config</span></li><li><span>asyncio pytests</span></li><li><span>Hunter Hunt is Visitor too</span></li></ul><h4><a name="if-you-are-interesting-and-review-code" class="md-header-anchor"></a><span>If you are interesting and review code</span></h4><p><span>Please, leave a review on issuies. I need your &quot;+&quot;, &quot;nice&quot;, &quot;good&quot;, &quot;this line can be more better...&quot;. If you have words to tell me, i want to know about it.</span></p><h4><a name="content" class="md-header-anchor"></a><span>Content</span></h4><ol start='' ><li><p><span>Part 1. How it work</span></p></li><li><p><span>Part 2. How it was built</span></p><ol start='' ><li><span>Main parts of code</span></li><li><span>Architecture principles</span></li><li><span>Some diagrams</span></li></ol></li></ol><h2><a name="part-1-how-it-work" class="md-header-anchor"></a><span>Part 1. How it work</span></h2><p><span>On some discord channel there appear message as &#39;-,</span><em><span>,.-&#39;`&#39;°-,</span></em><span>,.-&#39;&#39;` </span><img src="https://cdn.discordapp.com/emojis/439576463436546050.png?v=1" referrerpolicy="no-referrer" alt=":official_Duck_01_reversed:"><span> &lt; COUAAC&#39;, in random time. Gamers react on messages by commands such as &#39;dh!shoot&#39; and another. More rules you can find on </span><a href='https://docs.duckhunt.me/players-guide/players-quickstart'><span>source</span></a><span>. </span></p><p><span>HunterBot hunt on this ducks.</span></p><p><span>He read messages and react on next events with next </span><a href='resources/DECISION_TREE.yaml'><span>DecisionTree</span></a><span>:</span></p><div class="md-diagram-panel"><svg id="mermaidChart0" width="100%" xmlns="http://www.w3.org/2000/svg" style="max-width: 585.328125px;" viewBox="0 0 585.328125 596"><style>
+:root { --mermaid-font-family: sans-serif}
+:root { --mermaid-alt-font-family: sans-serif}</style><style></style><g><g class="output"><g class="clusters"></g><g class="edgePaths"><g class="edgePath" style="opacity: 1;"><path class="path" d="M89.57514880952381,218L180.1875,25L219.1953125,25" marker-end="url(#arrowhead23)" style="fill:none"></path><defs><marker id="arrowhead23" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M94.89608134920636,218L180.1875,109L209.1875,109" marker-end="url(#arrowhead24)" style="fill:none"></path><defs><marker id="arrowhead24" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M121.50074404761905,218L180.1875,193L205.1875,193" marker-end="url(#arrowhead25)" style="fill:none"></path><defs><marker id="arrowhead25" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M121.50074404761905,252L180.1875,277L207.1875,277" marker-end="url(#arrowhead26)" style="fill:none"></path><defs><marker id="arrowhead26" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M94.89608134920636,252L180.1875,361L212.921875,361" marker-end="url(#arrowhead27)" style="fill:none"></path><defs><marker id="arrowhead27" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M310.83035714285717,92L366.1875,67L405.0625,67" marker-end="url(#arrowhead28)" style="fill:none"></path><defs><marker id="arrowhead28" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M292.00892857142856,126L366.1875,193L409.46875,193" marker-end="url(#arrowhead29)" style="fill:none"></path><defs><marker id="arrowhead29" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M89.57514880952381,252L180.1875,445L216.7890625,445" marker-end="url(#arrowhead30)" style="fill:none"></path><defs><marker id="arrowhead30" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M282.5982142857143,428L366.1875,277L435.0625,277" marker-end="url(#arrowhead31)" style="fill:none"></path><defs><marker id="arrowhead31" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M292.00892857142856,428L366.1875,361L401.59375,361" marker-end="url(#arrowhead32)" style="fill:none"></path><defs><marker id="arrowhead32" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M310.83035714285717,462L366.1875,487L391.1875,487" marker-end="url(#arrowhead33)" style="fill:none"></path><defs><marker id="arrowhead33" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M285.73511904761904,462L366.1875,571L430.3984375,571" marker-end="url(#arrowhead34)" style="fill:none"></path><defs><marker id="arrowhead34" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M125.5859375,529L180.1875,529L220.3984375,529" marker-end="url(#arrowhead35)" style="fill:none"></path><defs><marker id="arrowhead35" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g></g><g class="edgeLabels"><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0" style="fill:#e8e8e8;"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0" style="fill:#e8e8e8;"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0" style="fill:#e8e8e8;"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0" style="fill:#e8e8e8;"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0" style="fill:#e8e8e8;"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0" style="fill:#e8e8e8;"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0" style="fill:#e8e8e8;"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0" style="fill:#e8e8e8;"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0" style="fill:#e8e8e8;"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0" style="fill:#e8e8e8;"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0" style="fill:#e8e8e8;"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0" style="fill:#e8e8e8;"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0" style="fill:#e8e8e8;"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="DuckHuntBotAuthor" transform="translate(81.59375,235)" style="opacity: 1;"><rect rx="0" ry="0" x="-73.59375" y="-17" width="147.1875" height="34" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-63.59375,-7)"><foreignObject width="127.1875" height="14"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">DuckHuntBotAuthor</div></foreignObject></g></g></g><g class="node default" id="NoDuckEvent" transform="translate(273.1875,25)" style="opacity: 1;"><rect rx="0" ry="0" x="-53.9921875" y="-17" width="107.984375" height="34" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-43.9921875,-7)"><foreignObject width="87.984375" height="14"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">NoDuckEvent</div></foreignObject></g></g></g><g class="node default" id="DuckDeathEvent" transform="translate(273.1875,109)" style="opacity: 1;"><rect rx="0" ry="0" x="-64" y="-17" width="128" height="34" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-54,-7)"><foreignObject width="108" height="14"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">DuckDeathEvent</div></foreignObject></g></g></g><g class="node default" id="DuckAppearEvent" transform="translate(273.1875,193)" style="opacity: 1;"><rect rx="0" ry="0" x="-68" y="-17" width="136" height="34" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-58,-7)"><foreignObject width="116" height="14"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">DuckAppearEvent</div></foreignObject></g></g></g><g class="node default" id="BabyDuckAppear" transform="translate(273.1875,277)" style="opacity: 1;"><rect rx="0" ry="0" x="-66" y="-17" width="132" height="34" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-56,-7)"><foreignObject width="112" height="14"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">BabyDuckAppear</div></foreignObject></g></g></g><g class="node default" id="BabyDuckAwait" transform="translate(273.1875,361)" style="opacity: 1;"><rect rx="0" ry="0" x="-60.265625" y="-17" width="120.53125" height="34" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-50.265625,-7)"><foreignObject width="100.53125" height="14"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">BabyDuckAwait</div></foreignObject></g></g></g><g class="node default" id="DuckFrightenedEvent" transform="translate(484.2578125,67)" style="opacity: 1;"><rect rx="0" ry="0" x="-79.1953125" y="-17" width="158.390625" height="34" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-69.1953125,-7)"><foreignObject width="138.390625" height="14"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">DuckFrightenedEvent</div></foreignObject></g></g></g><g class="node default" id="DuckNoCloverEvent" transform="translate(484.2578125,193)" style="opacity: 1;"><rect rx="0" ry="0" x="-74.7890625" y="-17" width="149.578125" height="34" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-64.7890625,-7)"><foreignObject width="129.578125" height="14"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">DuckNoCloverEvent</div></foreignObject></g></g></g><g class="node default" id="IAmMentioned" transform="translate(273.1875,445)" style="opacity: 1;"><rect rx="0" ry="0" x="-56.3984375" y="-17" width="112.796875" height="34" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-46.3984375,-7)"><foreignObject width="92.796875" height="14"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">IAmMentioned</div></foreignObject></g></g></g><g class="node default" id="AmmoEvent" transform="translate(484.2578125,277)" style="opacity: 1;"><rect rx="0" ry="0" x="-49.1953125" y="-17" width="98.390625" height="34" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-39.1953125,-7)"><foreignObject width="78.390625" height="14"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">AmmoEvent</div></foreignObject></g></g></g><g class="node default" id="JammedWeaponEvent" transform="translate(484.2578125,361)" style="opacity: 1;"><rect rx="0" ry="0" x="-82.6640625" y="-17" width="165.328125" height="34" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-72.6640625,-7)"><foreignObject width="145.328125" height="14"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">JammedWeaponEvent</div></foreignObject></g></g></g><g class="node default" id="WeaponConfiscatedEvent" transform="translate(484.2578125,487)" style="opacity: 1;"><rect rx="0" ry="0" x="-93.0703125" y="-17" width="186.140625" height="34" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-83.0703125,-7)"><foreignObject width="166.140625" height="14"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">WeaponConfiscatedEvent</div></foreignObject></g></g></g><g class="node default" id="IAmWetEvent" transform="translate(484.2578125,571)" style="opacity: 1;"><rect rx="0" ry="0" x="-53.859375" y="-17" width="107.71875" height="34" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-43.859375,-7)"><foreignObject width="87.71875" height="14"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">IAmWetEvent</div></foreignObject></g></g></g><g class="node default" id="IAmAuthor" transform="translate(81.59375,529)" style="opacity: 1;"><rect rx="0" ry="0" x="-43.9921875" y="-17" width="87.984375" height="34" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-33.9921875,-7)"><foreignObject width="67.984375" height="14"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">IAmAuthor</div></foreignObject></g></g></g><g class="node default" id="MyCommand" transform="translate(273.1875,529)" style="opacity: 1;"><rect rx="0" ry="0" x="-52.7890625" y="-17" width="105.578125" height="34" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-42.7890625,-7)"><foreignObject width="85.578125" height="14"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">MyCommand</div></foreignObject></g></g></g></g></g></g></svg></div><p><span>Bot can :</span></p><ul><li><span>shoot</span></li><li><span>check, if duck flowed away or killed by another gamers</span></li><li><span>reload weapon and control his ammo</span></li><li><span>hug baby duck</span></li><li><span>buy magazines and bullets</span></li><li><span>buy weapon, if it was confiscated</span></li><li><span>buy clover, if it isn&#39;t equipped</span></li></ul><p><span>Need to develop:</span></p><ul><li><span>control find items</span></li></ul><p>&nbsp;</p><h2><a name="part-2-how-it-built-features-of-code" class="md-header-anchor"></a><span>Part 2. How it built. Features of code.</span></h2><h3><a name="mainparts" class="md-header-anchor"></a><span>MainParts</span></h3><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="python" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="python"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 8px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">.</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-property">├──</span> <span class="cm-variable">abc_</span>.<span class="cm-property">py</span><span class="cm-tab" role="presentation" cm-text="	"> </span> &nbsp; &nbsp; <span class="cm-comment"># abc classes Publisher, Visitor, Subscriber</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">├──</span> <span class="cm-variable">checkers</span>.<span class="cm-property">py</span> &nbsp;<span class="cm-comment"># body of checkers for Event config</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">├──</span> <span class="cm-variable">clients</span>.<span class="cm-property">py</span> &nbsp; <span class="cm-comment"># client, which interact with DiscordApi: DiscrodClient, Post</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">├──</span> <span class="cm-variable">config</span>.<span class="cm-property">py</span> &nbsp; &nbsp;<span class="cm-comment"># main constants for Bot, import secrets keys from secret.py</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">├──</span> <span class="cm-variable">secret</span>.<span class="cm-property">py</span> &nbsp; &nbsp;<span class="cm-comment"># secrets keys for config</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">├──</span> <span class="cm-variable">events</span>.<span class="cm-property">py</span> &nbsp; &nbsp;<span class="cm-comment"># classes works with events: Event, DecisionTree, EventManager</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">├──</span> <span class="cm-variable">resources</span> &nbsp; &nbsp;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">│</span> &nbsp; <span class="cm-variable">├──</span> <span class="cm-variable">DECISION_TREE</span>.<span class="cm-property">yaml</span> <span class="cm-comment"># config, body of DecisionTree</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">│</span> &nbsp; <span class="cm-variable">└──</span> <span class="cm-variable">EVENTS</span>.<span class="cm-property">yaml</span> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment"># config, bodies for all Events with tests for its</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">├──</span> <span class="cm-variable">funcsource</span> &nbsp; <span class="cm-comment"># my lib with popular functions which needs in each project</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">│</span> &nbsp; <span class="cm-variable">├──</span> <span class="cm-variable">__init__</span>.<span class="cm-property">py</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">│</span> &nbsp; <span class="cm-variable">└──</span> <span class="cm-variable">traceback</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">├──</span> <span class="cm-variable">docs</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">│</span> &nbsp; <span class="cm-variable">├──</span> <span class="cm-variable">DiscordApi</span>.<span class="cm-property">md</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">│</span> &nbsp; <span class="cm-variable">├──</span> <span class="cm-variable">EventDiagramm</span>.<span class="cm-property">md</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">│</span> &nbsp; <span class="cm-variable">├──</span> <span class="cm-variable">Events</span>.<span class="cm-property">md</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">│</span> &nbsp; <span class="cm-variable">├──</span> <span class="cm-variable">History</span>.<span class="cm-property">md</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">│</span> &nbsp; <span class="cm-variable">├──</span> <span class="cm-variable">Main</span>.<span class="cm-property">md</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">│</span> &nbsp; <span class="cm-variable">└──</span> <span class="cm-variable">TODO</span>.<span class="cm-property">md</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">└──</span> <span class="cm-variable">test</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">├──</span> <span class="cm-variable">__init__</span>.<span class="cm-property">py</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">├──</span> <span class="cm-variable">list_client_channels</span>.<span class="cm-property">py</span> &nbsp; <span class="cm-comment"># get list of channels of user</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">├──</span> <span class="cm-variable">channel_history</span>.<span class="cm-property">py</span> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment"># get channel message history</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">├──</span> <span class="cm-variable">channel_listener</span>.<span class="cm-property">py</span> &nbsp; &nbsp; &nbsp; <span class="cm-comment"># resend messages from DiscordClient to terminal</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">├──</span> <span class="cm-variable">EventManager_listener</span>.<span class="cm-property">py</span> &nbsp;<span class="cm-comment"># resend events from EventManager to terminal</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">├──</span> <span class="cm-variable">testPost</span>.<span class="cm-property">py</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="cm-comment"># Post test - test sending messages to channel</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">├──</span> <span class="cm-variable">primitives</span>.<span class="cm-property">py</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">├──</span> <span class="cm-variable">resources</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="cm-comment"># container for test samples</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">│</span> &nbsp; <span class="cm-variable">├──</span> <span class="cm-variable">backup_messages_1000</span>.<span class="cm-property">pkl</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">│</span> &nbsp; <span class="cm-variable">├──</span> <span class="cm-variable">channels</span>.<span class="cm-property">yaml</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">│</span> &nbsp; <span class="cm-variable">├──</span> <span class="cm-variable">df_messages_1000</span>.<span class="cm-property">pkl</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">│</span> &nbsp; <span class="cm-variable">├──</span> <span class="cm-variable">duck_messages_1000</span>.<span class="cm-property">pkl</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">│</span> &nbsp; <span class="cm-variable">└──</span> <span class="cm-variable">messages_1000</span>.<span class="cm-property">pkl</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">├──</span> <span class="cm-variable">testDecisionArchitecture</span>.<span class="cm-property">py</span> <span class="cm-comment"># test first idea of architercture of DecisionTree</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">├──</span> <span class="cm-variable">test_events</span>.<span class="cm-property">py</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment"># tests for Event class</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">├──</span> <span class="cm-variable">test_hunter</span>.<span class="cm-property">py</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment"># tests for Hunter class</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">└──</span> <span class="cm-variable">test_test_asyncio</span>.<span class="cm-property">py</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 874px;"></div><div class="CodeMirror-gutters" style="display: none; height: 874px;"></div></div></div></pre><h3><a name="dataflow" class="md-header-anchor"></a><span>Dataflow</span></h3><div class="md-diagram-panel"><svg id="mermaidChart1" width="928.59375" xmlns="http://www.w3.org/2000/svg" viewBox="-8  0 530.625 494"><style>
+:root { --mermaid-font-family: sans-serif}
+:root { --mermaid-alt-font-family: sans-serif}</style><style></style><g></g><defs><marker id="dependencyEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 19,7 L9,13 L14,7 L9,1 Z"></path></marker></defs><g id="DiscordApi" class="stateGroup" transform="translate(189.9025,0 )" data-x-shift="189.9025"><rect x="8" y="8" width="71.5625" height="27" rx="5"></rect><text x="16" y="26" font-size="24" class="state-title">DiscordApi</text></g><g id="DiscordClient" class="stateGroup" transform="translate(183.84,79 )" data-x-shift="183.84"><rect x="8" y="8" width="83.6875" height="27" rx="5"></rect><text x="16" y="26" font-size="24" class="state-title">DiscordClient</text></g><g id="EventManager" class="stateGroup" transform="translate(0,193 )" data-x-shift="0"><rect x="0" y="-33" width="402.1875" height="82" rx="5"></rect><rect x="0" y="-33" width="402.1875" height="30" rx="5"></rect><rect x="0" y="-9" class="composit" width="402.1875" height="55" rx="0"></rect><g id="start1" class="stateGroup" transform="translate(0,8.5 )" data-x-shift="0"><circle r="5" cx="13" cy="13" style="stroke: black; fill: black;"></circle></g><g id="IfChannel" class="stateGroup" transform="translate(46,0 )" data-x-shift="46"><rect x="8" y="8" width="63.78125" height="27" rx="5"></rect><text x="16" y="26" font-size="24" class="state-title">IfChannel</text></g><g id="DecisionTree" class="stateGroup" transform="translate(145.78125,0 )" data-x-shift="145.78125"><rect x="8" y="8" width="80.703125" height="27" rx="5"></rect><text x="16" y="26" font-size="24" class="state-title">DecisionTree</text></g><g id="events_List" class="stateGroup" transform="translate(262.484375,0 )" data-x-shift="262.484375"><rect x="8" y="8" width="73.703125" height="27" rx="5"></rect><text x="16" y="26" font-size="24" class="state-title">events_List</text></g><g id="end1" class="stateGroup" transform="translate(372.1875,6.5 )" data-x-shift="372.1875"><circle r="7" cx="15" cy="15" style="stroke: black; fill: white;"></circle><circle r="5" cx="15" cy="15" style="stroke: black; fill: black;"></circle></g><path d="M26,21.5L27.666666666666668,21.5C29.333333333333332,21.5,32.666666666666664,21.5,36,21.5C39.333333333333336,21.5,42.666666666666664,21.5,44.333333333333336,21.5L46,21.5" id="edge0" class="transition" marker-end="url(#dependencyEnd)"></path><path d="M125.78125,21.5L127.44791666666667,21.5C129.11458333333334,21.5,132.44791666666666,21.5,135.78125,21.5C139.11458333333334,21.5,142.44791666666666,21.5,144.11458333333334,21.5L145.78125,21.5" id="edge1" class="transition" marker-end="url(#dependencyEnd)"></path><path d="M242.484375,21.5L244.15104166666666,21.5C245.81770833333334,21.5,249.15104166666666,21.5,252.484375,21.5C255.81770833333334,21.5,259.1510416666667,21.5,260.8177083333333,21.5L262.484375,21.5" id="edge2" class="transition" marker-end="url(#dependencyEnd)"></path><path d="M352.1875,21.5L353.8541666666667,21.5C355.5208333333333,21.5,358.8541666666667,21.5,362.1875,21.5C365.5208333333333,21.5,368.8541666666667,21.5,370.5208333333333,21.5L372.1875,21.5" id="edge3" class="transition" marker-end="url(#dependencyEnd)"></path><text x="165.859375" y="-15" font-size="24" class="state-title">EventManager</text></g><g id="DuckHunter" class="stateGroup" transform="translate(48.0703125,315 )" data-x-shift="48.0703125"><rect x="0" y="-33" width="306.046875" height="82" rx="5"></rect><rect x="0" y="-33" width="306.046875" height="30" rx="5"></rect><rect x="0" y="-9" class="composit" width="306.046875" height="55" rx="0"></rect><g id="start1" class="stateGroup" transform="translate(0,8.5 )" data-x-shift="0"><circle r="5" cx="13" cy="13" style="stroke: black; fill: black;"></circle></g><g id="EventsQueue" class="stateGroup" transform="translate(46,0 )" data-x-shift="46"><rect x="8" y="8" width="82.359375" height="27" rx="5"></rect><text x="16" y="26" font-size="24" class="state-title">EventsQueue</text></g><g id="on_EventNameMethod" class="stateGroup" transform="translate(164.359375,0 )" data-x-shift="164.359375"><rect x="8" y="8" width="125.6875" height="27" rx="5"></rect><text x="16" y="26" font-size="24" class="state-title">on_EventNameMethod</text></g><path d="M26,21.5L27.666666666666668,21.5C29.333333333333332,21.5,32.666666666666664,21.5,36,21.5C39.333333333333336,21.5,42.666666666666664,21.5,44.333333333333336,21.5L46,21.5" id="edge4" class="transition" marker-end="url(#dependencyEnd)"></path><path d="M144.359375,21.5L146.02604166666666,21.5C147.69270833333334,21.5,151.02604166666666,21.5,154.359375,21.5C157.69270833333334,21.5,161.02604166666666,21.5,162.69270833333334,21.5L164.359375,21.5" id="edge5" class="transition" marker-end="url(#dependencyEnd)"></path><text x="123.625" y="-15" font-size="24" class="state-title">DuckHunter</text></g><g id="Post" class="stateGroup" transform="translate(123.65625,437 )" data-x-shift="123.65625"><rect x="0" y="-33" width="390.96875" height="82" rx="5"></rect><rect x="0" y="-33" width="390.96875" height="30" rx="5"></rect><rect x="0" y="-9" class="composit" width="390.96875" height="55" rx="0"></rect><g id="start1" class="stateGroup" transform="translate(0,8.5 )" data-x-shift="0"><circle r="5" cx="13" cy="13" style="stroke: black; fill: black;"></circle></g><g id="Queue" class="stateGroup" transform="translate(46,0 )" data-x-shift="46"><rect x="8" y="8" width="49.5625" height="27" rx="5"></rect><text x="16" y="26" font-size="24" class="state-title">Queue</text></g><g id="wait_delay" class="stateGroup" transform="translate(131.5625,0 )" data-x-shift="131.5625"><rect x="8" y="8" width="70.03125" height="27" rx="5"></rect><text x="16" y="26" font-size="24" class="state-title">wait_delay</text></g><g id="next_message" class="stateGroup" transform="translate(237.59375,0 )" data-x-shift="237.59375"><rect x="8" y="8" width="87.375" height="27" rx="5"></rect><text x="16" y="26" font-size="24" class="state-title">next_message</text></g><g id="end1" class="stateGroup" transform="translate(360.96875,6.5 )" data-x-shift="360.96875"><circle r="7" cx="15" cy="15" style="stroke: black; fill: white;"></circle><circle r="5" cx="15" cy="15" style="stroke: black; fill: black;"></circle></g><path d="M26,21.5L27.666666666666668,21.5C29.333333333333332,21.5,32.666666666666664,21.5,36,21.5C39.333333333333336,21.5,42.666666666666664,21.5,44.333333333333336,21.5L46,21.5" id="edge6" class="transition" marker-end="url(#dependencyEnd)"></path><path d="M111.5625,21.5L113.22916666666667,21.5C114.89583333333333,21.5,118.22916666666667,21.5,121.5625,21.5C124.89583333333333,21.5,128.22916666666666,21.5,129.89583333333334,21.5L131.5625,21.5" id="edge7" class="transition" marker-end="url(#dependencyEnd)"></path><path d="M217.59375,21.5L219.26041666666666,21.5C220.92708333333334,21.5,224.26041666666666,21.5,227.59375,21.5C230.92708333333334,21.5,234.26041666666666,21.5,235.92708333333334,21.5L237.59375,21.5" id="edge8" class="transition" marker-end="url(#dependencyEnd)"></path><path d="M340.96875,21.5L342.6354166666667,21.5C344.3020833333333,21.5,347.6354166666667,21.5,350.96875,21.5C354.3020833333333,21.5,357.6354166666667,21.5,359.3020833333333,21.5L360.96875,21.5" id="edge9" class="transition" marker-end="url(#dependencyEnd)"></path><text x="183.3125" y="-15" font-size="24" class="state-title">Post</text></g><path d="M233.68375,43L233.68375,46C233.68375,49,233.68375,55,233.68375,61C233.68375,67,233.68375,73,233.68375,76L233.68375,79" id="edge10" class="transition" marker-end="url(#dependencyEnd)"></path><g class="stateLabel"><rect class="box" x="207.0509375" y="48" width="53.265625" height="19"></rect><text text-anchor="middle" x="233.68375" y="61">message</text><text text-anchor="middle" x="233.68375" y="72"></text></g><path d="M224.0670286885246,158L225.6698155737705,155C227.2726024590164,152,230.4781762295082,146,232.0809631147541,140C233.68375,134,233.68375,128,233.68375,125L233.68375,122" id="edge11" class="transition" marker-end="url(#dependencyEnd)"></path><g class="stateLabel"><rect class="box" x="201.31954851643445" y="128.05407505745623" width="63.59375" height="19.015625"></rect><text text-anchor="middle" x="233.11642351643445" y="141.06188755745623">(subscribe)</text><text text-anchor="middle" x="233.11642351643445" y="152.07751255745623"></text></g><path d="M198.20602848101265,122L193.25564873417724,125C188.30526898734175,128,178.40450949367087,134,175.0569166320813,140C171.7093237704918,146,174.9148975409836,152,176.5176844262295,155L178.1204713114754,158" id="edge12" class="transition" marker-end="url(#dependencyEnd)"></path><g class="stateLabel"><rect class="box" x="147.99551203952436" y="123.28060888215384" width="53.265625" height="19.015625"></rect><text text-anchor="middle" x="174.62832453952436" y="136.28842138215384">message</text><text text-anchor="middle" x="174.62832453952436" y="147.30404638215384"></text></g><path d="M167.50440573770493,244L165.1609631147541,247C162.8175204918033,250,158.13063524590163,256,158.13063524590163,262C158.13063524590163,268,162.8175204918033,274,165.1609631147541,277L167.50440573770493,280" id="edge13" class="transition" marker-end="url(#dependencyEnd)"></path><g class="stateLabel"><rect class="box" x="101.9125" y="249" width="103.0625" height="19"></rect><text text-anchor="middle" x="153.44375" y="262">([events], message)</text><text text-anchor="middle" x="153.44375" y="273"></text></g><path d="M256.910481557377,280L260.80467213114747,277C264.698862704918,274,272.487243852459,268,272.48724385245896,262C272.487243852459,256,264.698862704918,250,260.8046721311475,247L256.910481557377,244" id="edge14" class="transition" marker-end="url(#dependencyEnd)"></path><g class="stateLabel"><rect class="box" x="248.47875" y="249" width="63.59375" height="19"></rect><text text-anchor="middle" x="280.275625" y="262">(subscribe)</text><text text-anchor="middle" x="280.275625" y="273"></text></g><path d="M201.09375,366L201.09375,369C201.09375,372,201.09375,378,206.89933401639345,384C212.70491803278688,390,224.31608606557378,396,230.1216700819672,399L235.92725409836066,402" id="edge15" class="transition" marker-end="url(#dependencyEnd)"></path><g class="stateLabel"><rect class="box" x="183.88992066145062" y="375.86051976503023" width="53.25" height="19.015625"></rect><text text-anchor="middle" x="210.51492066145062" y="388.86833226503023">message</text><text text-anchor="middle" x="210.51492066145062" y="399.88395726503023"></text></g><path d="M402.35399590163934,402L408.15957991803276,399C413.96516393442624,396,425.5763319672131,390,431.3819159836066,376.8333333333333C437.1875,363.6666666666667,437.1875,343.3333333333333,437.1875,323C437.1875,302.6666666666667,437.1875,282.3333333333333,437.1875,262C437.1875,241.66666666666666,437.1875,221.33333333333334,437.1875,201C437.1875,180.66666666666666,437.1875,160.33333333333334,411.57750000000004,145.19577546687304C385.96750000000003,130.05821760041277,334.7475,120.11643520082555,309.13750000000005,115.14554400103192L283.52750000000003,110.17465280123831" id="edge16" class="transition" marker-end="url(#dependencyEnd)"></path><g class="stateLabel"><rect class="box" x="397.5" y="190.33297010192507" width="79.375" height="19.015625"></rect><text text-anchor="middle" x="437.1875" y="203.34078260192507">send message</text><text text-anchor="middle" x="437.1875" y="214.35640760192507"></text></g><path d="M270.52767405063287,79L275.6686867088607,76C280.80969936708857,73,291.09172468354427,67,291.09172468354427,61C291.09172468354427,55,280.80969936708857,49,275.6686867088607,46L270.52767405063287,43" id="edge17" class="transition" marker-end="url(#dependencyEnd)"></path><g class="stateLabel"><rect class="box" x="261.68625" y="48" width="79.375" height="19"></rect><text text-anchor="middle" x="301.37375" y="61">send message</text><text text-anchor="middle" x="301.37375" y="72"></text></g></svg></div><h3><a name="classdiagramm" class="md-header-anchor"></a><span>ClassDiagramm</span></h3><div class="md-diagram-panel"><svg id="mermaidChart2" width="891.50390625" xmlns="http://www.w3.org/2000/svg" height="513.5" viewBox="-22.5 -22.5 891.50390625 513.5" style="height: 553.5px;"><style>
+:root { --mermaid-font-family: sans-serif}
+:root { --mermaid-alt-font-family: sans-serif}</style><style></style><g></g><defs><marker id="extensionStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 1,7 L18,13 V 1 Z"></path></marker></defs><defs><marker id="extensionEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 1,1 V 13 L18,7 Z"></path></marker></defs><defs><marker id="compositionStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="compositionEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="aggregationStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="aggregationEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="dependencyStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 5,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="dependencyEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L14,7 L9,1 Z"></path></marker></defs><g id="classid-DiscrodApi-0" class="classGroup " transform="translate(115.87890625,13.5 )"><rect x="0" y="0" width="65.5625" height="30"></rect><text y="15" x="0"><tspan class="title" x="5">DiscrodApi</tspan></text><line x1="0" y1="21" y2="21" x2="65.5625"></line><text x="5" y="31" fill="white" class="classText"></text><line x1="0" y1="26" y2="26" x2="65.5625"></line><text x="5" y="41" fill="white" class="classText"></text></g><g id="classid-Client-1" class="classGroup " transform="translate(201.375,142.5 )"><rect x="0" y="0" width="83.8125" height="57"></rect><text y="15" x="0"><tspan x="19">«discord»</tspan><tspan class="title" dy="10" x="26.6796875">Client</tspan></text><line x1="0" y1="31" y2="31" x2="83.8125"></line><text x="5" y="41" fill="white" class="classText"></text><line x1="0" y1="36" y2="36" x2="83.8125"></line><text x="5" y="51" fill="white" class="classText"><tspan x="5">on_message()</tspan></text></g><g id="classid-TextChannel-2" class="classGroup " transform="translate(16.5625,151 )"><rect x="0" y="0" width="114.859375" height="40"></rect><text y="15" x="0"><tspan x="34.5234375">«discord»</tspan><tspan class="title" dy="10" x="26.6796875">TextChannel</tspan></text><line x1="0" y1="31" y2="31" x2="114.859375"></line><text x="5" y="41" fill="white" class="classText"></text><line x1="0" y1="36" y2="36" x2="114.859375"></line><text x="5" y="51" fill="white" class="classText"></text></g><g id="classid-Post-3" class="classGroup " transform="translate(0,285 )"><rect x="0" y="0" width="147.984375" height="68"></rect><text y="15" x="0"><tspan x="46.3671875">«clients.py»</tspan><tspan class="title" dy="10" x="61.8203125">Post</tspan></text><line x1="0" y1="31" y2="31" x2="147.984375"></line><text x="5" y="41" fill="white" class="classText"><tspan x="5">channel: discrod.TextChannel</tspan></text><line x1="0" y1="47" y2="47" x2="147.984375"></line><text x="5" y="62" fill="white" class="classText"><tspan x="5">send(text)</tspan></text></g><g id="classid-DiscordClient-4" class="classGroup " transform="translate(197.984375,299 )"><rect x="0" y="0" width="130.5" height="40"></rect><text y="15" x="0"><tspan x="37.625">«clients.py»</tspan><tspan class="title" dy="10" x="31.3984375">DiscordClient</tspan></text><line x1="0" y1="31" y2="31" x2="130.5"></line><text x="5" y="41" fill="white" class="classText"></text><line x1="0" y1="36" y2="36" x2="130.5"></line><text x="5" y="51" fill="white" class="classText"></text></g><g id="classid-Publisher-5" class="classGroup " transform="translate(345.5078125,127 )"><rect x="0" y="0" width="103.828125" height="88"></rect><text y="15" x="0"><tspan x="27.6171875">«abc_.py»</tspan><tspan class="title" dy="10" x="28.0625">Publisher</tspan></text><line x1="0" y1="31" y2="31" x2="103.828125"></line><text x="5" y="41" fill="white" class="classText"><tspan x="5">subscribers []</tspan></text><line x1="0" y1="47" y2="47" x2="103.828125"></line><text x="5" y="62" fill="white" class="classText"><tspan x="5">publish(message)</tspan><tspan x="5" dy="10">subscribe(obj)</tspan><tspan x="5" dy="10">unsubscribe(obj)</tspan></text></g><g id="classid-EventManager-6" class="classGroup " transform="translate(381.66796875,293.5 )"><rect x="0" y="0" width="138.421875" height="51"></rect><text y="15" x="0"><tspan x="41.0234375">«events.py»</tspan><tspan class="title" dy="10" x="33.96875">EventManager</tspan></text><line x1="0" y1="31" y2="31" x2="138.421875"></line><text x="5" y="41" fill="white" class="classText"><tspan x="5">decisionTree: DecisionTree</tspan></text><line x1="0" y1="47" y2="47" x2="138.421875"></line><text x="5" y="62" fill="white" class="classText"></text></g><g id="classid-Subscriber-7" class="classGroup " transform="translate(478.99609375,0 )"><rect x="0" y="0" width="110.5" height="57"></rect><text y="15" x="0"><tspan x="30.953125">«abc_.py»</tspan><tspan class="title" dy="10" x="28.0703125">Subscriber</tspan></text><line x1="0" y1="31" y2="31" x2="110.5"></line><text x="5" y="41" fill="white" class="classText"></text><line x1="0" y1="36" y2="36" x2="110.5"></line><text x="5" y="51" fill="white" class="classText"><tspan x="5">receive(message)</tspan></text></g><g id="classid-DuckHunter-8" class="classGroup " transform="translate(521.48046875,107 )"><rect x="0" y="0" width="121.0625" height="128"></rect><text y="15" x="0"><tspan x="33.171875">«hunter.py»</tspan><tspan class="title" dy="10" x="31.1328125">DuckHunter</tspan></text><line x1="0" y1="31" y2="31" x2="121.0625"></line><text x="5" y="41" fill="white" class="classText"><tspan x="5">events: Queue[Events]</tspan></text><line x1="0" y1="47" y2="47" x2="121.0625"></line><text x="5" y="62" fill="white" class="classText"><tspan x="5">main_loop()</tspan><tspan x="5" dy="10">checkevents()</tspan><tspan x="5" dy="10">on_AmmoEvent()</tspan><tspan x="5" dy="10">on_DuckAppearEvent()</tspan><tspan x="5" dy="10">on_Hunt()</tspan><tspan x="5" dy="10">on_Hug()</tspan><tspan x="5" dy="10">command(message)</tspan></text></g><g id="classid-DecisionTree-9" class="classGroup " transform="translate(461.44140625,403 )"><rect x="0" y="0" width="145.609375" height="68"></rect><text y="15" x="0"><tspan x="44.6171875">«events.py»</tspan><tspan class="title" dy="10" x="40.453125">DecisionTree</tspan></text><line x1="0" y1="31" y2="31" x2="145.609375"></line><text x="5" y="41" fill="white" class="classText"><tspan x="5">childs: List[Event]</tspan></text><line x1="0" y1="47" y2="47" x2="145.609375"></line><text x="5" y="62" fill="white" class="classText"><tspan x="5">check(message) : List[Event]</tspan></text></g><g id="classid-Event-10" class="classGroup " transform="translate(570.08984375,288.5 )"><rect x="0" y="0" width="95.046875" height="61"></rect><text y="15" x="0"><tspan x="19.3359375">«events.py»</tspan><tspan class="title" dy="10" x="32.5625">Event</tspan></text><line x1="0" y1="31" y2="31" x2="95.046875"></line><text x="5" y="41" fill="white" class="classText"><tspan x="5">action</tspan><tspan x="5" dy="10">childs: List[Event]</tspan></text><line x1="0" y1="57" y2="57" x2="95.046875"></line><text x="5" y="72" fill="white" class="classText"></text></g><g id="classid-Visitor-11" class="classGroup " transform="translate(723.91015625,127 )"><rect x="0" y="0" width="125.09375" height="88"></rect><text y="15" x="0"><tspan x="38.25">«abc_.py»</tspan><tspan class="title" dy="10" x="46.015625">Visitor</tspan></text><line x1="0" y1="31" y2="31" x2="125.09375"></line><text x="5" y="41" fill="white" class="classText"><tspan x="5">actions[]</tspan><tspan x="5" dy="10">call_obj.on_VisitorName</tspan><tspan x="5" dy="10">call_action[obj]</tspan></text><line x1="0" y1="67" y2="67" x2="125.09375"></line><text x="5" y="82" fill="white" class="classText"><tspan x="5">action(obj)</tspan></text></g><g id="classid-Hunt-12" class="classGroup " transform="translate(752.59765625,290.5 )"><rect x="0" y="0" width="87.71875" height="57"></rect><text y="15" x="0"><tspan x="16.5">«hunter.py»</tspan><tspan class="title" dy="10" x="31.1328125">Hunt</tspan></text><line x1="0" y1="31" y2="31" x2="87.71875"></line><text x="5" y="41" fill="white" class="classText"></text><line x1="0" y1="36" y2="36" x2="87.71875"></line><text x="5" y="51" fill="white" class="classText"><tspan x="5">shoot()</tspan></text></g><g id="classid-Hug-13" class="classGroup " transform="translate(754.65234375,408.5 )"><rect x="0" y="0" width="83.609375" height="57"></rect><text y="15" x="0"><tspan x="14.4453125">«hunter.py»</tspan><tspan class="title" dy="10" x="31.1328125">Hug</tspan></text><line x1="0" y1="31" y2="31" x2="83.609375"></line><text x="5" y="41" fill="white" class="classText"></text><line x1="0" y1="36" y2="36" x2="83.609375"></line><text x="5" y="51" fill="white" class="classText"><tspan x="5">hug()</tspan></text></g><path d="M175.18943487149534,43.5L186.53807072624613,49.916666666666664C197.8867065809969,56.333333333333336,220.58397829049844,69.16666666666667,231.93261414524923,85.66666666666667C243.28125,102.16666666666667,243.28125,122.33333333333333,243.28125,132.41666666666666L243.28125,142.5" id="edge0" class="relation dashed-line"></path><path d="M127.7252117406542,43.5L118.76970770054517,49.916666666666664C109.81420366043614,56.333333333333336,91.90319558021808,69.16666666666667,82.94769154010903,87.08333333333333C73.9921875,105,73.9921875,128,73.9921875,139.5L73.9921875,151" id="edge1" class="relation dashed-line"></path><path d="M73.9921875,191L73.9921875,202.5C73.9921875,214,73.9921875,237,73.9921875,252.66666666666666C73.9921875,268.3333333333333,73.9921875,276.6666666666667,73.9921875,280.8333333333333L73.9921875,285" id="edge2" class="relation dashed-line" marker-start="url(#dependencyStart)"></path><path d="M243.28125,199.5L243.28125,209.58333333333334C243.28125,219.66666666666666,243.28125,239.83333333333334,245.47947563559322,256.4166666666667C247.67770127118646,273,252.07415254237287,286,254.2723781779661,292.5L256.4706038135593,299" id="edge3" class="relation" marker-start="url(#extensionStart)"></path><path d="M371.7352528089888,215L367.3568512991573,222.5C362.97844978932585,230,354.22164676966287,245,340.7839563297467,259C327.3462658898305,273,309.227688029661,286,300.1683990995763,292.5L291.10911016949154,299" id="edge4" class="relation" marker-start="url(#extensionStart)"></path><path d="M402.3656952247191,215L403.2083918539326,222.5C404.05108848314603,230,405.736481741573,245,410.6916375427498,258.0833333333333C415.6467933439265,271.1666666666667,423.8717116878531,282.3333333333333,427.9841708598164,287.9166666666667L432.0966300317797,293.5" id="edge5" class="relation" marker-start="url(#extensionStart)"></path><path d="M508.8008542640187,57L505.08079001168227,61.166666666666664C501.36072575934577,65.33333333333333,493.9205972546729,73.66666666666667,490.20053300233644,92.66666666666667C486.48046875,111.66666666666667,486.48046875,141.33333333333334,486.48046875,171C486.48046875,200.66666666666666,486.48046875,230.33333333333334,483.11139433262707,250.75C479.74231991525426,271.1666666666667,473.0041710805085,282.3333333333333,469.6350966631356,287.9166666666667L466.2660222457627,293.5" id="edge6" class="relation" marker-start="url(#extensionStart)"></path><path d="M559.6913332359813,57L563.4113974883178,61.166666666666664C567.1314617406542,65.33333333333333,574.5715902453271,73.66666666666667,578.2916544976636,82C582.01171875,90.33333333333333,582.01171875,98.66666666666667,582.01171875,102.83333333333333L582.01171875,107" id="edge7" class="relation" marker-start="url(#extensionStart)"></path><path d="M450.87890625,344.5L450.87890625,350.0833333333333C450.87890625,355.6666666666667,450.87890625,366.8333333333333,456.76641949152537,376.5833333333333C462.65393273305085,386.3333333333333,474.4289592161017,394.6666666666667,480.31647245762707,398.8333333333333L486.20398569915255,403" id="edge8" class="relation dashed-line" marker-start="url(#compositionStart)"></path><g class="classLabel"><rect class="box" x="-2.5" y="-2.5" width="5" height="5"></rect><text class="label" x="454.8690333069757" y="380.8238627620917" fill="red" text-anchor="middle"></text></g><path d="M582.01171875,235L582.01171875,239.16666666666666C582.01171875,243.33333333333334,582.01171875,251.66666666666666,584.8779462394068,260.5833333333333C587.7441737288135,269.5,593.4766287076271,279,596.3428561970339,283.75L599.2090836864406,288.5" id="edge9" class="relation" marker-start="url(#aggregationStart)"></path><g class="classLabel"><rect class="box" x="546.28125" y="252.046875" width="76.1875" height="16.015625"></rect><text class="label" x="584.1523398830818" y="263.54750291793596" fill="red" text-anchor="middle">Visitor interface</text></g><path d="M745.7670733848315,215L738.8312851123596,222.5C731.8954968398876,230,718.0239202949439,245,704.1210041093364,257.25C690.2180879237288,269.5,676.2838320974577,279,669.316704184322,283.75L662.3495762711865,288.5" id="edge10" class="relation" marker-start="url(#extensionStart)"></path><path d="M617.61328125,349.5L617.61328125,354.25C617.61328125,359,617.61328125,368.5,611.7257680084746,377.4166666666667C605.8382547669491,386.3333333333333,594.0632282838983,394.6666666666667,588.1757150423729,398.8333333333333L582.2882018008474,403" id="edge11" class="relation" marker-end="url(#compositionEnd)"></path><g class="classLabel"><rect class="box" x="578.0625" y="370.765625" width="66.703125" height="16.015625"></rect><text class="label" x="611.5824955859197" y="382.2680623498392" fill="red" text-anchor="middle">(composition)</text></g><path d="M665.13671875,301.19809057762427L670.7864583333334,299.0817421480202C676.4361979166666,296.9653937184162,687.7356770833334,292.7326968592081,694.7978515625,290.61634842960405C701.8600260416666,288.5,704.6848958333334,288.5,707.509765625,293.5833333333333C710.3346354166666,298.6666666666667,713.1595052083334,308.8333333333333,713.1595052083334,319C713.1595052083334,329.1666666666667,710.3346354166666,339.3333333333333,707.509765625,344.4166666666667C704.6848958333334,349.5,701.8600260416666,349.5,694.7978515625,347.3836515703959C687.7356770833334,345.2673031407919,676.4361979166666,341.0346062815838,670.7864583333334,338.9182578519798L665.13671875,336.80190942237573" id="edge12" class="relation" marker-end="url(#compositionEnd)"></path><g class="classLabel"><rect class="box" x="682.46875" y="307.5" width="66.703125" height="16"></rect><text class="label" x="715.984375" y="319" fill="red" text-anchor="middle">(composition)</text></g><path d="M791.400851474719,215L792.2435481039325,222.5C793.086244733146,230,794.7716379915731,245,795.6143346207865,257.5833333333333C796.45703125,270.1666666666667,796.45703125,280.3333333333333,796.45703125,285.4166666666667L796.45703125,290.5" id="edge13" class="relation" marker-start="url(#extensionStart)"></path><path d="M796.45703125,347.5L796.45703125,352.5833333333333C796.45703125,357.6666666666667,796.45703125,367.8333333333333,796.45703125,378C796.45703125,388.1666666666667,796.45703125,398.3333333333333,796.45703125,403.4166666666667L796.45703125,408.5" id="edge14" class="relation" marker-start="url(#extensionStart)"></path></svg></div><h3><a name="events" class="md-header-anchor"></a><span>Events</span></h3><p><span>Event object decide two tasks:</span></p><ul><li><span>build DecisionTree object to analyze message content (pattern Composite was used for it, see getchilds Event method)</span></li><li><span>keep information, how another objects react on this Event (there was used Visitor pattern)</span></li><li><span>simple creation and add new Events (</span><a href='resources/EVENTS.yaml'><span>Events.yaml</span></a><span>)</span></li></ul><p><span>Example Event config:</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="yaml"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="yaml"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 8px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom">DuckAppearEvent</span><span class="cm-meta">:</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom">  level</span><span class="cm-meta">: </span>INFO <span class="cm-comment"># similar to logging level</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom">  checker</span><span class="cm-meta">:</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta"> &nbsp;  - </span>regex <span class="cm-comment"># which funcion call on message content and args for her</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta"> &nbsp;  - </span>&lt;:official_Duck_01_reversed:439576463436546050&gt;|try to hug the duck.?</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom">  tests</span><span class="cm-meta">: </span><span class="cm-comment"># some simple tests for checker function to avoid misspells in checker</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp;  true</span><span class="cm-meta">: </span><span class="cm-string">'sss &lt;:official_Duck_01_reversed:439576463436546050&gt; sss'</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp;  false</span><span class="cm-meta">: </span><span class="cm-string">''</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 184px;"></div><div class="CodeMirror-gutters" style="display: none; height: 184px;"></div></div></div></pre><p><span>Each Event knowns his childs, and send them the message If self.checker(message) == True.</span></p><p><span>So on, there will be returned list of events from tree, which react on message</span></p><h5><a name="interaction-with-hunter" class="md-header-anchor"></a><span>Interaction with Hunter:</span></h5><p><span>When hunter receive the Event, He call Event.action from self.  Further, the Event get Hunter method associated with this Event, as in Visitor pattern. Each Event have their name and appropriate Hunter method. For example: DuckAppearEvent and Hunter.on_DuckAppearEvent().</span></p><h5><a name="decisiontree" class="md-header-anchor"></a><span>DecisionTree</span></h5><p><span>DecisionTree built from </span><a href='resources/DECISION_TREE.yaml'><span>DECISION_TREE.yaml</span></a><span> config with Event.get_childs() method</span></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+</body>
+</html>
