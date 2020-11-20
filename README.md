@@ -4,9 +4,9 @@ I use this repository as one of my portfolio. However, you can use it as you wan
 
 ##### links
 
-[HTML PREVIEW of this page](https://phenixflame.github.io/DuckHunterBot/)  
-[Return to github](https://github.com/phenixflame/DuckHunterBot)
-[Issue for comments and reviews](https://github.com/phenixflame/DuckHunterBot/issues/1)
+[HTML PREVIEW of this page](https://phenixflame.github.io/DuckHunterBot/)     
+[Return to github](https://github.com/phenixflame/DuckHunterBot)   
+[Issue for comments and reviews](https://github.com/phenixflame/DuckHunterBot/issues/1)   
 
 This is a repository of fun project for Discord Bot. Bot is written with asyncio python library. For connect it use discord client and api. Main aim of this bot is to play with [DuckHuntBot](https://github.com/DuckHunt-discord/DHV3) on Discord chat.
 
