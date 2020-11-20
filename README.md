@@ -1,8 +1,12 @@
 ## Introduction
-[HTML PREVIEW of this page](https://fenixsign.github.io/DuckHunterBot/)  
+
 I use this repository as one of my portfolio. However, you can use it as you want.
 
-[Issue for comments and reviews](https://github.com/fenixsign/DuckHunterBot/issues/1)
+##### links
+
+[HTML PREVIEW of this page](https://phenixflame.github.io/DuckHunterBot/)  
+[Return to github](https://github.com/phenixflame/DuckHunterBot)
+[Issue for comments and reviews](https://github.com/phenixflame/DuckHunterBot/issues/1)
 
 This is a repository of fun project for Discord Bot. Bot is written with asyncio python library. For connect it use discord client and api. Main aim of this bot is to play with [DuckHuntBot](https://github.com/DuckHunt-discord/DHV3) on Discord chat.
 
@@ -18,7 +22,7 @@ Advantages of this project:
 
 #### If you are interesting and review code
 
-Please, leave a review on issuies. I need your "+", "nice", "good", "this line can be more better...". If you have words to tell me, i want to know about it.
+Please, leave a review on issues. I need your "+", "nice", "good", "this line can be more better...". If you have words to tell me, i want to know about it.
 
 #### Content
 
@@ -274,7 +278,7 @@ DuckAppearEvent:
     false: ''
 ```
 
-Each Event knowns his childs, and send them the message If self.checker(message) == True.
+Each Event knowns his children, and send them the message If self.checker(message) == True.
 
 So on, there will be returned list of events from tree, which react on message
 
